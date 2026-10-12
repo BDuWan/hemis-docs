@@ -171,9 +171,9 @@
             min-height: 0;
         }
 
-        /* Cột 1: 4 ô vuông phân tán, tách rời xa nhau, chiều ngang bé lại */
+        /* Cột 1: 4 ô vuông phân tán, tách rời xa nhau, không tràn chữ */
         .scattered-col {
-            width: 255px;
+            width: 300px;
             height: 385px;
             display: flex;
             flex-direction: column;
@@ -185,12 +185,14 @@
             background: #ffffff;
             border: 2px solid var(--warning);
             border-radius: 12px;
-            padding: 8px 12px;
+            padding: 9px 13px;
             display: flex;
-            justify-content: space-between;
-            align-items: center;
+            flex-direction: column;
+            justify-content: center;
             box-shadow: var(--shadow-card);
-            height: 66px;
+            height: 72px;
+            box-sizing: border-box;
+            overflow: hidden;
             transition: all 0.2s ease;
         }
 
@@ -200,25 +202,37 @@
             border-color: var(--warning-dark);
         }
 
+        .scattered-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 4px;
+        }
+
         .scattered-title {
-            font-size: 14px;
+            font-size: 13.5px;
             font-weight: 800;
             color: var(--text-main);
-            line-height: 1.3;
+            line-height: 1.2;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .scattered-sub {
             font-size: 11.5px;
             color: var(--text-muted);
-            margin-top: 2px;
             font-weight: 500;
-            line-height: 1.3;
+            line-height: 1.25;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .scattered-badge {
-            font-size: 11px;
+            font-size: 10.5px;
             font-weight: 800;
-            padding: 4px 8px;
+            padding: 2.5px 7px;
             border-radius: 6px;
             white-space: nowrap;
             margin-left: 6px;
@@ -242,7 +256,7 @@
 
         /* Khu vực mũi tên chéo hội tụ dài */
         .converge-connector {
-            width: 145px;
+            width: 130px;
             height: 385px;
             display: flex;
             align-items: center;
@@ -487,60 +501,60 @@
                 </div>
 
                 <div class="flow-diagram-s1">
-                    <!-- CỘT 1: 4 Ô VUÔNG TÁCH RỜI XA NHAU, CHIỀU NGANG THU GỌN -->
+                    <!-- CỘT 1: 4 Ô VUÔNG TÁCH RỜI XA NHAU, KHÔNG TRÀN CHỮ -->
                     <div class="scattered-col">
                         <div class="scattered-card">
-                            <div>
-                                <div class="scattered-title">Phần Mềm Quản Lý Đào Tạo</div>
-                                <div class="scattered-sub">CSDL SQL Server (Ngành, Sinh viên, Điểm)</div>
+                            <div class="scattered-header">
+                                <span class="scattered-title">Phần Mềm Quản Lý Đào Tạo</span>
+                                <span class="scattered-badge badge-sql">SQL</span>
                             </div>
-                            <span class="scattered-badge badge-sql">SQL</span>
+                            <div class="scattered-sub">CSDL SQL Server (Ngành, Sinh viên, Điểm)</div>
                         </div>
 
                         <div class="scattered-card">
-                            <div>
-                                <div class="scattered-title">Phòng Tổ Chức Cán Bộ</div>
-                                <div class="scattered-sub">File Excel hồ sơ CBGV, hợp đồng, lý lịch</div>
+                            <div class="scattered-header">
+                                <span class="scattered-title">Phòng Tổ Chức Cán Bộ</span>
+                                <span class="scattered-badge badge-excel">Excel</span>
                             </div>
-                            <span class="scattered-badge badge-excel">Excel</span>
+                            <div class="scattered-sub">File Excel hồ sơ CBGV, hợp đồng lao động</div>
                         </div>
 
                         <div class="scattered-card">
-                            <div>
-                                <div class="scattered-title">Phòng CSVC, QLKH, Tài Chính</div>
-                                <div class="scattered-sub">File Excel đất đai, phòng học, tài sản</div>
+                            <div class="scattered-header">
+                                <span class="scattered-title">Phòng CSVC, QLKH & Tài Chính</span>
+                                <span class="scattered-badge badge-excel">Excel</span>
                             </div>
-                            <span class="scattered-badge badge-excel">Excel</span>
+                            <div class="scattered-sub">File Excel đất đai, tài sản, đề tài NCKH</div>
                         </div>
 
                         <div class="scattered-card">
-                            <div>
-                                <div class="scattered-title">Hồ Sơ Giấy & Sổ Gốc</div>
-                                <div class="scattered-sub">Sổ cấp văn bằng tốt nghiệp, quyết định</div>
+                            <div class="scattered-header">
+                                <span class="scattered-title">Hồ Sơ Giấy & Sổ Gốc</span>
+                                <span class="scattered-badge badge-paper">Hồ sơ</span>
                             </div>
-                            <span class="scattered-badge badge-paper">Hồ sơ</span>
+                            <div class="scattered-sub">Sổ cấp văn bằng tốt nghiệp, quyết định</div>
                         </div>
                     </div>
 
-                    <!-- MŨI TÊN CHÉO HỘI TỤ (DÀI 145PX) -->
+                    <!-- MŨI TÊN CHÉO HỘI TỤ (DÀI 130PX) -->
                     <div class="converge-connector">
-                        <svg class="converge-svg" viewBox="0 0 145 385">
+                        <svg class="converge-svg" viewBox="0 0 130 385">
                             <defs>
                                 <marker id="arrow-blue" markerWidth="9" markerHeight="7" refX="7" refY="3.5" orient="auto">
                                     <polygon points="0 0, 9 3.5, 0 7" fill="#0284c7" />
                                 </marker>
                             </defs>
                             <!-- Mũi tên 1: Từ ô 1 chéo xuống hội tụ (↘) -->
-                            <line x1="2" y1="33" x2="137" y2="132" stroke="#0284c7" stroke-width="2.6" stroke-linecap="round" marker-end="url(#arrow-blue)" />
+                            <line x1="2" y1="36" x2="122" y2="132" stroke="#0284c7" stroke-width="2.6" stroke-linecap="round" marker-end="url(#arrow-blue)" />
                             
                             <!-- Mũi tên 2: Từ ô 2 hơi chéo xuống (↘) -->
-                            <line x1="2" y1="137" x2="137" y2="186" stroke="#0284c7" stroke-width="2.6" stroke-linecap="round" marker-end="url(#arrow-blue)" />
+                            <line x1="2" y1="140" x2="122" y2="186" stroke="#0284c7" stroke-width="2.6" stroke-linecap="round" marker-end="url(#arrow-blue)" />
                             
                             <!-- Mũi tên 3: Từ ô 3 hơi chéo lên (↗) -->
-                            <line x1="2" y1="243" x2="137" y2="240" stroke="#0284c7" stroke-width="2.6" stroke-linecap="round" marker-end="url(#arrow-blue)" />
+                            <line x1="2" y1="244" x2="122" y2="240" stroke="#0284c7" stroke-width="2.6" stroke-linecap="round" marker-end="url(#arrow-blue)" />
                             
                             <!-- Mũi tên 4: Từ ô 4 chéo lên hội tụ (↗) -->
-                            <line x1="2" y1="348" x2="137" y2="294" stroke="#0284c7" stroke-width="2.6" stroke-linecap="round" marker-end="url(#arrow-blue)" />
+                            <line x1="2" y1="348" x2="122" y2="294" stroke="#0284c7" stroke-width="2.6" stroke-linecap="round" marker-end="url(#arrow-blue)" />
                         </svg>
                     </div>
 
