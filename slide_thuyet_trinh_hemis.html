@@ -22,6 +22,11 @@
             --primary-dark: #0369a1;
             --primary-light: #e0f2fe;
             --primary-border: #bae6fd;
+
+            --indigo: #4f46e5;
+            --indigo-dark: #3730a3;
+            --indigo-light: #eef2ff;
+            --indigo-border: #c7d2fe;
             
             --success: #059669;
             --success-dark: #047857;
@@ -94,7 +99,7 @@
             align-items: center;
             border-bottom: 2px solid var(--border-card);
             padding-bottom: 12px;
-            margin-bottom: 14px;
+            margin-bottom: 12px;
             flex-shrink: 0;
         }
 
@@ -122,7 +127,7 @@
         }
 
         .category-pill {
-            font-size: 14px;
+            font-size: 13.5px;
             font-weight: 800;
             color: var(--primary);
             background: var(--primary-light);
@@ -134,12 +139,12 @@
 
         /* Slide Titles */
         .slide-title-block {
-            margin-bottom: 14px;
+            margin-bottom: 12px;
             flex-shrink: 0;
         }
 
         .slide-title {
-            font-size: 34px;
+            font-size: 31px;
             font-weight: 800;
             color: var(--text-main);
             letter-spacing: -0.6px;
@@ -147,9 +152,9 @@
         }
 
         .slide-desc {
-            font-size: 16.5px;
+            font-size: 15.5px;
             color: var(--text-muted);
-            margin-top: 5px;
+            margin-top: 4px;
             font-weight: 600;
         }
 
@@ -161,7 +166,7 @@
             min-height: 0;
         }
 
-        /* ==================== SLIDE 1: HỘI TỤ MŨI TÊN CHÉO ==================== */
+        /* ==================== SLIDE 1: HỘI TỤ + DATA HUB + ADAPTER API + HEMIS ==================== */
         .flow-diagram-s1 {
             display: flex;
             align-items: center;
@@ -171,9 +176,9 @@
             min-height: 0;
         }
 
-        /* Cột 1: 4 ô vuông phân tán, tách rời xa nhau, không tràn chữ */
+        /* Cột 1: 4 ô nguồn phân tán */
         .scattered-col {
-            width: 300px;
+            width: 255px;
             height: 385px;
             display: flex;
             flex-direction: column;
@@ -185,7 +190,7 @@
             background: #ffffff;
             border: 2px solid var(--warning);
             border-radius: 12px;
-            padding: 9px 13px;
+            padding: 8px 12px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -206,11 +211,11 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 4px;
+            margin-bottom: 3px;
         }
 
         .scattered-title {
-            font-size: 13.5px;
+            font-size: 13px;
             font-weight: 800;
             color: var(--text-main);
             line-height: 1.2;
@@ -220,7 +225,7 @@
         }
 
         .scattered-sub {
-            font-size: 11.5px;
+            font-size: 11px;
             color: var(--text-muted);
             font-weight: 500;
             line-height: 1.25;
@@ -230,9 +235,9 @@
         }
 
         .scattered-badge {
-            font-size: 10.5px;
+            font-size: 10px;
             font-weight: 800;
-            padding: 2.5px 7px;
+            padding: 2px 6px;
             border-radius: 6px;
             white-space: nowrap;
             margin-left: 6px;
@@ -254,9 +259,9 @@
             color: var(--text-muted);
         }
 
-        /* Khu vực mũi tên chéo hội tụ dài */
+        /* Mũi tên chéo hội tụ */
         .converge-connector {
-            width: 130px;
+            width: 65px;
             height: 385px;
             display: flex;
             align-items: center;
@@ -272,44 +277,92 @@
             overflow: visible;
         }
 
-        /* Cột 2: Data Hub - Đứng ở giữa, chiều cao vừa vặn */
-        .hub-pillar {
-            width: 325px;
-            background: #ffffff;
-            border: 2.5px solid var(--primary);
-            border-radius: 16px;
-            padding: 14px 18px;
+        /* Mũi tên ngang giữa các khối */
+        .arrow-connector {
+            width: 52px;
             display: flex;
             flex-direction: column;
-            gap: 9px;
-            box-shadow: 0 8px 24px -4px rgba(2, 132, 199, 0.16);
+            align-items: center;
+            justify-content: center;
+            gap: 3px;
+            flex-shrink: 0;
+        }
+
+        .arrow-connector .arrow-label {
+            font-size: 11px;
+            font-weight: 800;
+            color: var(--text-muted);
+            text-align: center;
+            line-height: 1.15;
+            white-space: nowrap;
+        }
+
+        /* Cột 2: TUU Data Hub */
+        .hub-pillar {
+            width: 250px;
+            background: #ffffff;
+            border: 2.5px solid var(--primary);
+            border-radius: 14px;
+            padding: 11px 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            box-shadow: 0 8px 20px -4px rgba(2, 132, 199, 0.16);
+            flex-shrink: 0;
+        }
+
+        /* Cột 3: Adapter API */
+        .adapter-pillar {
+            width: 260px;
+            background: #ffffff;
+            border: 2.5px solid var(--indigo);
+            border-radius: 14px;
+            padding: 11px 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            box-shadow: 0 8px 20px -4px rgba(79, 70, 229, 0.16);
+            flex-shrink: 0;
+        }
+
+        /* Cột 4: Cổng HEMIS Bộ GD&ĐT */
+        .moet-pillar {
+            width: 235px;
+            background: #ffffff;
+            border: 2.5px solid var(--success);
+            border-radius: 14px;
+            padding: 11px 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            box-shadow: var(--shadow-card);
             flex-shrink: 0;
         }
 
         .pillar-head {
-            font-size: 14.5px;
+            font-size: 13.5px;
             font-weight: 800;
-            padding: 8px 12px;
+            padding: 7px 10px;
             border-radius: 8px;
             text-align: center;
             letter-spacing: 0.3px;
         }
 
         .flow-item {
-            border-radius: 10px;
-            padding: 9px 13px;
+            border-radius: 9px;
+            padding: 8px 11px;
             display: flex;
             flex-direction: column;
             gap: 2px;
         }
 
         .flow-item-title {
-            font-size: 14.5px;
+            font-size: 13px;
             font-weight: 800;
         }
 
         .flow-item-sub {
-            font-size: 12.5px;
+            font-size: 11px;
             font-weight: 500;
         }
 
@@ -317,67 +370,28 @@
             background: var(--primary-light);
             border: 1.5px solid var(--primary-border);
         }
+        .hub-item .flow-item-title { color: var(--primary-dark); }
+        .hub-item .flow-item-sub { color: var(--text-sub); }
 
-        .hub-item .flow-item-title {
-            color: var(--primary-dark);
+        .adapter-item {
+            background: var(--indigo-light);
+            border: 1.5px solid var(--indigo-border);
         }
-
-        .hub-item .flow-item-sub {
-            color: var(--text-sub);
-        }
-
-        /* Mũi tên giữa Hub và HEMIS dài ra */
-        .arrow-between-hub-moet {
-            width: 110px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 4px;
-            flex-shrink: 0;
-        }
-
-        .arrow-between-hub-moet .arrow-label {
-            font-size: 12.5px;
-            font-weight: 800;
-            color: var(--text-sub);
-            text-align: center;
-            line-height: 1.2;
-            margin-top: 2px;
-        }
-
-        /* Cột 3: HEMIS - Chiều cao vừa vặn */
-        .moet-pillar {
-            width: 285px;
-            background: #ffffff;
-            border: 2px solid var(--success);
-            border-radius: 16px;
-            padding: 14px 18px;
-            display: flex;
-            flex-direction: column;
-            gap: 9px;
-            box-shadow: var(--shadow-card);
-            flex-shrink: 0;
-        }
+        .adapter-item .flow-item-title { color: var(--indigo-dark); }
+        .adapter-item .flow-item-sub { color: #475569; }
 
         .moet-item {
             background: var(--success-light);
             border: 1.5px solid var(--success-border);
         }
-
-        .moet-item .flow-item-title {
-            color: var(--success-dark);
-        }
-
-        .moet-item .flow-item-sub {
-            color: var(--text-sub);
-        }
+        .moet-item .flow-item-title { color: var(--success-dark); }
+        .moet-item .flow-item-sub { color: var(--text-sub); }
 
         /* Banner */
         .banner {
             border-radius: 12px;
             padding: 10px 20px;
-            font-size: 15px;
+            font-size: 14.5px;
             font-weight: 700;
             display: flex;
             align-items: center;
@@ -396,7 +410,7 @@
         .grid-2 { 
             display: grid; 
             grid-template-columns: 1fr 1fr; 
-            gap: 24px; 
+            gap: 18px; 
             flex: 1;
             min-height: 0;
         }
@@ -404,14 +418,23 @@
         .grid-3 { 
             display: grid; 
             grid-template-columns: repeat(3, 1fr); 
-            gap: 18px; 
+            gap: 16px; 
+        }
+
+        .grid-2x2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 16px;
+            flex: 1;
+            min-height: 0;
         }
 
         .card {
             background: var(--bg-card);
             border: 1.5px solid var(--border-card);
-            border-radius: 16px;
-            padding: 20px 24px;
+            border-radius: 14px;
+            padding: 16px 20px;
             box-shadow: var(--shadow-card);
             display: flex;
             flex-direction: column;
@@ -448,44 +471,51 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.2s;
+            transition: all 0.2s ease;
         }
 
         .nav-btn:hover {
             background: var(--primary);
-            color: #fff;
+            color: #ffffff;
             border-color: var(--primary);
         }
 
         .counter {
-            font-family: var(--font-mono);
             font-size: 15px;
             font-weight: 800;
-            color: var(--text-muted);
+            color: var(--text-main);
+            font-family: var(--font-mono);
+            min-width: 55px;
+            text-align: center;
         }
 
-        .counter span#curr {
-            color: var(--primary);
-        }
-
-        .progress-bar {
+        .progress-bar-container {
             position: fixed;
             top: 0;
             left: 0;
+            width: 100vw;
             height: 4px;
+            background: #e2e8f0;
+            z-index: 1000;
+        }
+
+        .progress-bar {
+            height: 100%;
             background: var(--primary);
-            z-index: 1001;
-            transition: width 0.3s;
+            width: 25%;
+            transition: width 0.3s ease;
         }
     </style>
 </head>
 <body>
 
-    <div class="progress-bar" id="progressBar"></div>
+    <div class="progress-bar-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
 
     <div class="slide-deck">
 
-        <!-- ==================== SLIDE 1: MÔ HÌNH TỔNG THỂ (MŨI TÊN CHÉO HỘI TỤ DÀI) ==================== -->
+        <!-- ==================== SLIDE 1: MÔ HÌNH KIẾN TRÚC TỔNG THỂ (DỄ HIỂU CHO NON-TECH) ==================== -->
         <div class="slide active">
             <div class="slide-header">
                 <div class="brand-group">
@@ -494,37 +524,38 @@
                 </div>
                 <div class="category-pill">KIẾN TRÚC TỔNG THỂ</div>
             </div>
+
             <div class="slide-body">
                 <div class="slide-title-block">
-                    <h2 class="slide-title">Mô Hình Tổng Thể: Gom Dữ Liệu Phân Tán Lên HEMIS</h2>
-                    <p class="slide-desc">Dữ liệu phân tán từng phòng ban được kết nối tập trung về TUU DataHub trước khi đẩy lên Cổng Bộ GD&ĐT</p>
+                    <h1 class="slide-title">Mô Hình Tổng Thể: Gom Dữ Liệu Phân Tán Lên Cổng HEMIS</h1>
+                    <p class="slide-desc">Dữ liệu từ các phòng ban được gom tự động về DataHub của trường, chuẩn hóa và chuyển tiếp an toàn lên Cổng Bộ GD&ĐT</p>
                 </div>
 
                 <div class="flow-diagram-s1">
-                    <!-- CỘT 1: 4 Ô VUÔNG TÁCH RỜI XA NHAU, KHÔNG TRÀN CHỮ -->
+                    <!-- CỘT 1: 4 Ô NGUỒN PHÂN TÁN TẠI TRƯỜNG -->
                     <div class="scattered-col">
                         <div class="scattered-card">
                             <div class="scattered-header">
-                                <span class="scattered-title">Phần Mềm Quản Lý Đào Tạo</span>
-                                <span class="scattered-badge badge-sql">SQL</span>
+                                <span class="scattered-title">Phần Mềm Đào Tạo</span>
+                                <span class="scattered-badge badge-sql">Phần mềm</span>
                             </div>
-                            <div class="scattered-sub">CSDL SQL Server (Ngành, Sinh viên, Điểm)</div>
+                            <div class="scattered-sub">Thông tin sinh viên, kết quả điểm, ngành học</div>
                         </div>
 
                         <div class="scattered-card">
                             <div class="scattered-header">
                                 <span class="scattered-title">Phòng Tổ Chức Cán Bộ</span>
-                                <span class="scattered-badge badge-excel">Excel</span>
+                                <span class="scattered-badge badge-excel">File Excel</span>
                             </div>
-                            <div class="scattered-sub">File Excel hồ sơ CBGV, hợp đồng lao động</div>
+                            <div class="scattered-sub">Hồ sơ cán bộ giảng viên, hợp đồng lao động</div>
                         </div>
 
                         <div class="scattered-card">
                             <div class="scattered-header">
-                                <span class="scattered-title">Phòng CSVC, QLKH & Tài Chính</span>
-                                <span class="scattered-badge badge-excel">Excel</span>
+                                <span class="scattered-title">Phòng CSVC & QLKH</span>
+                                <span class="scattered-badge badge-excel">File Excel</span>
                             </div>
-                            <div class="scattered-sub">File Excel đất đai, tài sản, đề tài NCKH</div>
+                            <div class="scattered-sub">Cơ sở vật chất, đất đai, đề tài NCKH</div>
                         </div>
 
                         <div class="scattered-card">
@@ -536,291 +567,218 @@
                         </div>
                     </div>
 
-                    <!-- MŨI TÊN CHÉO HỘI TỤ (DÀI 130PX) -->
+                    <!-- MŨI TÊN CHÉO HỘI TỤ (TỪ NGUỒN PHÂN TÁN VÀO DATA HUB) -->
                     <div class="converge-connector">
-                        <svg class="converge-svg" viewBox="0 0 130 385">
+                        <svg class="converge-svg" viewBox="0 0 65 385">
                             <defs>
                                 <marker id="arrow-blue" markerWidth="9" markerHeight="7" refX="7" refY="3.5" orient="auto">
                                     <polygon points="0 0, 9 3.5, 0 7" fill="#0284c7" />
                                 </marker>
                             </defs>
-                            <!-- Mũi tên 1: Từ ô 1 chéo xuống hội tụ (↘) -->
-                            <line x1="2" y1="36" x2="122" y2="132" stroke="#0284c7" stroke-width="2.6" stroke-linecap="round" marker-end="url(#arrow-blue)" />
-                            
-                            <!-- Mũi tên 2: Từ ô 2 hơi chéo xuống (↘) -->
-                            <line x1="2" y1="140" x2="122" y2="186" stroke="#0284c7" stroke-width="2.6" stroke-linecap="round" marker-end="url(#arrow-blue)" />
-                            
-                            <!-- Mũi tên 3: Từ ô 3 hơi chéo lên (↗) -->
-                            <line x1="2" y1="244" x2="122" y2="240" stroke="#0284c7" stroke-width="2.6" stroke-linecap="round" marker-end="url(#arrow-blue)" />
-                            
-                            <!-- Mũi tên 4: Từ ô 4 chéo lên hội tụ (↗) -->
-                            <line x1="2" y1="348" x2="122" y2="294" stroke="#0284c7" stroke-width="2.6" stroke-linecap="round" marker-end="url(#arrow-blue)" />
+                            <line x1="2" y1="36" x2="57" y2="125" stroke="#0284c7" stroke-width="2.5" stroke-linecap="round" marker-end="url(#arrow-blue)" />
+                            <line x1="2" y1="140" x2="57" y2="175" stroke="#0284c7" stroke-width="2.5" stroke-linecap="round" marker-end="url(#arrow-blue)" />
+                            <line x1="2" y1="244" x2="57" y2="235" stroke="#0284c7" stroke-width="2.5" stroke-linecap="round" marker-end="url(#arrow-blue)" />
+                            <line x1="2" y1="348" x2="57" y2="285" stroke="#0284c7" stroke-width="2.5" stroke-linecap="round" marker-end="url(#arrow-blue)" />
                         </svg>
                     </div>
 
-                    <!-- CỘT 2: TUU DATA HUB (ĐỨNG Ở GIỮA - TẬP TRUNG, GỌN GÀNG) -->
+                    <!-- CỘT 2: TUU DATA HUB (CƠ SỞ DỮ LIỆU TRUNG TÂM) -->
                     <div class="hub-pillar">
                         <div class="pillar-head" style="background: var(--primary); color: #fff;">
-                            TUU DATA HUB (ĐỨNG Ở GIỮA - TẬP TRUNG)
+                            TUU DATA HUB (DATABASE TRUNG TÂM)
                         </div>
 
                         <div class="flow-item hub-item">
                             <div class="flow-item-title">1. Gom Dữ Liệu Tự Động</div>
-                            <div class="flow-item-sub">Kéo SQL Server Read-Only & nạp mẫu Excel</div>
+                            <div class="flow-item-sub">Tự động kết nối phần mềm & nhận file Excel</div>
                         </div>
 
                         <div class="flow-item hub-item">
-                            <div class="flow-item-title">2. Chuẩn Hóa Danh Mục</div>
-                            <div class="flow-item-sub">Tự động khớp >175 danh mục chuẩn Bộ GD&ĐT</div>
+                            <div class="flow-item-title">2. Khớp Danh Mục Chuẩn</div>
+                            <div class="flow-item-sub">Tự động đối soát theo danh mục của Bộ GD&ĐT</div>
                         </div>
 
                         <div class="flow-item hub-item">
-                            <div class="flow-item-title">3. Quét & Báo Lỗi Trực Quan</div>
-                            <div class="flow-item-sub">Chỉ rõ từng dòng thiếu CCCD, sai mã để sửa nhanh</div>
+                            <div class="flow-item-title">3. Rà Soát Lỗi Dễ Nhìn</div>
+                            <div class="flow-item-sub">Chỉ rõ dòng nào thiếu thông tin để sửa nhanh</div>
                         </div>
 
                         <div class="flow-item hub-item">
-                            <div class="flow-item-title">4. Ký Số Điện Tử</div>
-                            <div class="flow-item-sub">Bao gói XML-DSig hợp lệ (USB Token / SmartCA)</div>
+                            <div class="flow-item-title">4. Kho Dữ Liệu Tập Trung</div>
+                            <div class="flow-item-sub">Lưu trữ an toàn, Nhà trường hoàn toàn làm chủ</div>
                         </div>
                     </div>
 
-                    <!-- MŨI TÊN DÀI TỪ DATA HUB SANG CỔNG BỘ -->
-                    <div class="arrow-between-hub-moet">
-                        <svg width="90" height="26" viewBox="0 0 90 26">
+                    <!-- MŨI TÊN GIỮA DATA HUB VÀ ADAPTER API -->
+                    <div class="arrow-connector">
+                        <svg width="48" height="24" viewBox="0 0 48 24">
+                            <defs>
+                                <marker id="arrow-indigo" markerWidth="9" markerHeight="7" refX="7" refY="3.5" orient="auto">
+                                    <polygon points="0 0, 9 3.5, 0 7" fill="#4f46e5" />
+                                </marker>
+                            </defs>
+                            <line x1="4" y1="12" x2="42" y2="12" stroke="#4f46e5" stroke-width="2.6" stroke-linecap="round" marker-end="url(#arrow-indigo)" />
+                        </svg>
+                        <span class="arrow-label">Chuyển tiếp<br>chuẩn hóa</span>
+                    </div>
+
+                    <!-- CỘT 3: ADAPTER API (CẦU NỐI KẾT NỐI BỘ) -->
+                    <div class="adapter-pillar">
+                        <div class="pillar-head" style="background: var(--indigo); color: #fff;">
+                            ADAPTER API (CẦU NỐI KẾT NỐI BỘ)
+                        </div>
+
+                        <div class="flow-item adapter-item">
+                            <div class="flow-item-title">1. Định Dạng Đúng Chuẩn Bộ</div>
+                            <div class="flow-item-sub">Đóng gói dữ liệu theo đúng mẫu Bộ yêu cầu</div>
+                        </div>
+
+                        <div class="flow-item adapter-item">
+                            <div class="flow-item-title">2. Ký Số Điện Tử Của Trường</div>
+                            <div class="flow-item-sub">Dùng con dấu số / USB Token của Nhà trường</div>
+                        </div>
+
+                        <div class="flow-item adapter-item">
+                            <div class="flow-item-title">3. Kết Nối Bảo Mật Với Bộ</div>
+                            <div class="flow-item-sub">Tự động đăng nhập tài khoản Cổng HEMIS</div>
+                        </div>
+
+                        <div class="flow-item adapter-item">
+                            <div class="flow-item-title">4. Truyền Dữ Liệu An Toàn</div>
+                            <div class="flow-item-sub">Đẩy hồ sơ lên Bộ & tự gửi lại nếu gián đoạn</div>
+                        </div>
+                    </div>
+
+                    <!-- MŨI TÊN GIỮA ADAPTER API VÀ CỔNG HEMIS -->
+                    <div class="arrow-connector">
+                        <svg width="48" height="24" viewBox="0 0 48 24">
                             <defs>
                                 <marker id="arrow-green" markerWidth="9" markerHeight="7" refX="7" refY="3.5" orient="auto">
                                     <polygon points="0 0, 9 3.5, 0 7" fill="#059669" />
                                 </marker>
                             </defs>
-                            <line x1="4" y1="13" x2="82" y2="13" stroke="#059669" stroke-width="3" stroke-linecap="round" marker-end="url(#arrow-green)" />
+                            <line x1="4" y1="12" x2="42" y2="12" stroke="#059669" stroke-width="2.6" stroke-linecap="round" marker-end="url(#arrow-green)" />
                         </svg>
-                        <span class="arrow-label">REST API<br>Adapter</span>
+                        <span class="arrow-label">Đẩy lên<br>Cổng Bộ</span>
                     </div>
 
-                    <!-- CỘT 3: CỔNG HEMIS BỘ GD&ĐT - GỌN GÀNG -->
+                    <!-- CỘT 4: CỔNG HEMIS BỘ GD&ĐT -->
                     <div class="moet-pillar">
-                        <div class="pillar-head" style="background: var(--success-light); color: var(--success-dark);">
+                        <div class="pillar-head" style="background: var(--success); color: #fff;">
                             CỔNG HEMIS BỘ GD&ĐT
                         </div>
 
                         <div class="flow-item moet-item">
-                            <div class="flow-item-title">SSO OAuth2</div>
-                            <div class="flow-item-sub">Xác thực kết nối tài khoản trường</div>
+                            <div class="flow-item-title">Xác Nhận Nhà Trường</div>
+                            <div class="flow-item-sub">Nhận diện tài khoản chính thức của Trường</div>
                         </div>
 
                         <div class="flow-item moet-item">
-                            <div class="flow-item-title">Tiếp Nhận Ký Số</div>
-                            <div class="flow-item-sub">Kiểm tra tính pháp lý file XML đã ký</div>
+                            <div class="flow-item-title">Kiểm Tra Tính Pháp Lý</div>
+                            <div class="flow-item-sub">Xác thực con dấu điện tử và chữ ký số</div>
                         </div>
 
                         <div class="flow-item moet-item">
-                            <div class="flow-item-title">Dữ Liệu Nghiệp Vụ</div>
-                            <div class="flow-item-sub">Tiếp nhận các gói dữ liệu JSON</div>
+                            <div class="flow-item-title">Tiếp Nhận Dữ Liệu Số</div>
+                            <div class="flow-item-sub">Cập nhật vào Cơ sở dữ liệu Quốc gia</div>
                         </div>
 
                         <div class="flow-item moet-item">
-                            <div class="flow-item-title">CSDL Quốc Gia</div>
-                            <div class="flow-item-sub">Phê duyệt chỉ tiêu tuyển sinh năm tới</div>
+                            <div class="flow-item-title">Chốt Chỉ Tiêu Tuyển Sinh</div>
+                            <div class="flow-item-sub">Phê duyệt chỉ tiêu tuyển sinh cho năm tới</div>
                         </div>
                     </div>
                 </div>
 
                 <div class="banner banner-blue">
-                    💡 <strong>Mục đích cốt lõi:</strong> Nhà trường <strong>KHÔNG PHẢI NHẬP LẠI</strong> dữ liệu cũ! Data Hub tự động gom, ánh xạ và đẩy Cổng Bộ.
+                    💡 <strong>Mục đích cốt lõi:</strong> Nhà trường <strong>KHÔNG PHẢI NHẬP LẠI</strong> dữ liệu cũ! Hệ thống tự động gom, chuẩn hóa và gửi thẳng lên Cổng Bộ GD&ĐT.
                 </div>
             </div>
         </div>
 
-        <!-- ==================== SLIDE 2: HAI GIAI ĐOẠN (HÀNG TRÊN - HÀNG DƯỚI, GỌN GÀNG KHÔNG TRỐNG) ==================== -->
+        <!-- ==================== SLIDE 2: CÁC GIAI ĐOẠN THỰC HIỆN (GĐ1 VÀ GĐ2 ĐỀU 3 CARD NGANG HÀNG ĐỐI XỨNG) ==================== -->
         <div class="slide">
             <div class="slide-header">
                 <div class="brand-group">
                     <span class="brand-badge">LDA</span>
                     <span class="brand-name">TRƯỜNG ĐẠI HỌC CÔNG ĐOÀN</span>
                 </div>
-                <div class="category-pill">LỘ TRÌNH PHÁT TRIỂN</div>
+                <div class="category-pill">LỘ TRÌNH THỰC HIỆN</div>
             </div>
+
             <div class="slide-body">
                 <div class="slide-title-block">
                     <h2 class="slide-title">Lộ Trình Chiến Lược: 2 Giai Đoạn Triển Khai</h2>
-                    <p class="slide-desc">Từ hoàn thành nghĩa vụ nộp Bộ cấp bách đến Hệ thống Quản trị Đại học số toàn diện</p>
+                    <p class="slide-desc">Giai đoạn 1: Tập trung 1 tháng hoàn thành nghĩa vụ nộp Bộ & dựng CSDL Hub • Giai đoạn 2: Phát triển ERP Đại học số toàn diện</p>
                 </div>
 
-                <!-- Bố cục căn giữa, không kéo giãn thừa khoảng trắng -->
-                <div style="display: flex; flex-direction: column; justify-content: center; gap: 20px; flex: 1;">
-                    <!-- HÀNG TRÊN: GIAI ĐOẠN 1 -->
-                    <div class="card" style="border: 2px solid var(--primary); padding: 18px 26px; gap: 14px;">
+                <div style="display: flex; flex-direction: column; justify-content: center; gap: 16px; flex: 1;">
+                    <!-- HÀNG TRÊN: GIAI ĐOẠN 1 (3 CARD NGANG HÀNG ĐỐI XỨNG) -->
+                    <div class="card" style="border: 2px solid var(--primary); padding: 16px 22px; gap: 12px;">
                         <div style="display: flex; align-items: center; justify-content: space-between;">
-                            <div style="display: flex; align-items: center; gap: 14px;">
-                                <span style="background: var(--primary); color: #fff; font-size: 13.5px; font-weight: 800; padding: 5px 14px; border-radius: 8px;">
+                            <div style="display: flex; align-items: center; gap: 12px;">
+                                <span style="background: var(--primary); color: #fff; font-size: 13px; font-weight: 800; padding: 5px 12px; border-radius: 7px;">
                                     GIAI ĐOẠN 1 (1 THÁNG - CẤP BÁCH)
                                 </span>
-                                <span style="font-size: 20px; font-weight: 800; color: var(--text-main);">
-                                    Tích Hợp & Đẩy Dữ Liệu Lên CSDL HEMIS Bộ GD&ĐT
+                                <span style="font-size: 18.5px; font-weight: 800; color: var(--text-main);">
+                                    Mục Tiêu: Tích Hợp Lên HEMIS & Xây Dựng Database Hub Tập Trung
                                 </span>
                             </div>
-                            <span style="font-size: 13.5px; font-weight: 800; color: var(--danger); background: var(--danger-light); padding: 5px 14px; border-radius: 6px;">
-                                Mục tiêu sống còn: Bảo toàn chỉ tiêu tuyển sinh
+                            <span style="font-size: 13px; font-weight: 800; color: var(--danger); background: var(--danger-light); padding: 5px 12px; border-radius: 6px;">
+                                Bảo toàn 100% chỉ tiêu tuyển sinh
                             </span>
                         </div>
 
-                        <div class="grid-3" style="gap: 16px;">
-                            <div style="background: #f0f9ff; border: 1.5px solid #bae6fd; padding: 14px 18px; border-radius: 12px;">
-                                <div style="font-size: 15px; font-weight: 800; color: var(--primary-dark); margin-bottom: 5px;">Phạm Vi Thực Hiện</div>
-                                <div style="font-size: 13.5px; color: var(--text-sub); line-height: 1.5;">Gom dữ liệu từ SQL Đào tạo và file Excel các phòng ban ➔ Chuẩn hóa mã ➔ Ký số điện tử ➔ Đẩy Cổng Bộ.</div>
+                        <!-- 3 CARD NGANG HÀNG CÂN ĐỐI -->
+                        <div class="grid-3" style="gap: 14px;">
+                            <div style="background: #f0f9ff; border: 1.5px solid #bae6fd; padding: 12px 16px; border-radius: 10px;">
+                                <div style="font-size: 14.5px; font-weight: 800; color: var(--primary-dark); margin-bottom: 5px;">🎯 Mục Tiêu & Thời Gian (30 Ngày)</div>
+                                <div style="font-size: 13px; color: var(--text-sub); line-height: 1.5;">Hoàn thành nộp dữ liệu lên Cổng HEMIS đúng hạn trong 1 tháng. Tạo lập 01 CSDL tập trung (Database Hub) để làm sạch và lưu trữ dữ liệu toàn trường. Nhà trường <strong>không phải nhập lại dữ liệu cũ</strong>.</div>
                             </div>
-                            <div style="background: #f0f9ff; border: 1.5px solid #bae6fd; padding: 14px 18px; border-radius: 12px;">
-                                <div style="font-size: 15px; font-weight: 800; color: var(--primary-dark); margin-bottom: 5px;">Cách Làm Việc & Phối Hợp</div>
-                                <div style="font-size: 13.5px; color: var(--text-sub); line-height: 1.5;">Nhà trường không phải gõ lại; tận dụng dữ liệu sẵn có. Trưởng phòng kiểm tra và bấm duyệt dữ liệu phòng mình trên web.</div>
+
+                            <div style="background: #f0f9ff; border: 1.5px solid #bae6fd; padding: 12px 16px; border-radius: 10px;">
+                                <div style="font-size: 14.5px; font-weight: 800; color: var(--primary-dark); margin-bottom: 5px;">🏆 Kết Quả Cuối Cùng Đạt Được</div>
+                                <div style="font-size: 13px; color: var(--text-sub); line-height: 1.5;">Đồng bộ 100% dữ liệu hợp lệ có ký số điện tử của Trường lên Cổng HEMIS. Bàn giao <strong>01 Database Hub sạch</strong>, chuẩn hóa theo danh mục Bộ GD&ĐT. Bảo toàn trọn vẹn chỉ tiêu tuyển sinh.</div>
                             </div>
-                            <div style="background: #f0f9ff; border: 1.5px solid #bae6fd; padding: 14px 18px; border-radius: 12px;">
-                                <div style="font-size: 15px; font-weight: 800; color: var(--primary-dark); margin-bottom: 5px;">Kết Quả Đạt Được</div>
-                                <div style="font-size: 13.5px; color: var(--text-sub); line-height: 1.5;">Hoàn thành đúng hạn Công văn 6240 của Bộ, bảo toàn 100% chỉ tiêu tuyển sinh và uy tín của Nhà trường.</div>
+
+                            <div style="background: #fffbeb; border: 1.5px solid #fde68a; padding: 12px 16px; border-radius: 10px;">
+                                <div style="font-size: 14.5px; font-weight: 800; color: #92400e; margin-bottom: 5px;">⭐ Kịch Bản Bảo Vệ Cấp Bách (Ưu Tiên)</div>
+                                <div style="font-size: 13px; color: #78350f; line-height: 1.5;">Nếu thời gian quá gấp rút, cam kết ưu tiên bảo đảm hoàn thành trước <strong>5 phân hệ cốt lõi</strong> (Ngành đào tạo, Tuyển sinh/Người học, Cán bộ giảng viên, Cơ sở vật chất, Tài chính) để trường nộp Cổng Bộ đúng hạn, bảo toàn chỉ tiêu.</div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- HÀNG DƯỚI: GIAI ĐOẠN 2 -->
-                    <div class="card" style="border: 2px solid var(--success); padding: 18px 26px; gap: 14px;">
+                    <!-- HÀNG DƯỚI: GIAI ĐOẠN 2 (3 CARD NGANG HÀNG ĐỐI XỨNG) -->
+                    <div class="card" style="border: 2px solid var(--success); padding: 16px 22px; gap: 12px;">
                         <div style="display: flex; align-items: center; justify-content: space-between;">
-                            <div style="display: flex; align-items: center; gap: 14px;">
-                                <span style="background: var(--success); color: #fff; font-size: 13.5px; font-weight: 800; padding: 5px 14px; border-radius: 8px;">
-                                    GIAI ĐOẠN 2 (MỞ RỘNG DÀI HẠN)
+                            <div style="display: flex; align-items: center; gap: 12px;">
+                                <span style="background: var(--success); color: #fff; font-size: 13px; font-weight: 800; padding: 5px 12px; border-radius: 7px;">
+                                    GIAI ĐOẠN 2 (ĐỊNH HƯỚNG TƯƠNG LAI)
                                 </span>
-                                <span style="font-size: 20px; font-weight: 800; color: var(--text-main);">
-                                    Hệ Thống Quản Trị Tác Nghiệp Hoàn Chỉnh (ERP Đại Học)
+                                <span style="font-size: 18px; font-weight: 800; color: var(--text-main);">
+                                    Xây Dựng Hệ Thống Quản Trị Tác Nghiệp Hoàn Chỉnh (ERP Đại Học Số)
                                 </span>
                             </div>
-                            <span style="font-size: 13.5px; font-weight: 800; color: var(--success-dark); background: var(--success-light); padding: 5px 14px; border-radius: 6px;">
-                                Quản trị số toàn diện
+                            <span style="font-size: 13px; font-weight: 800; color: var(--success-dark); background: var(--success-light); padding: 5px 12px; border-radius: 6px;">
+                                Hiện đại hóa quản trị trường
                             </span>
                         </div>
 
-                        <div class="grid-3" style="gap: 16px;">
-                            <div style="background: #f0fdf4; border: 1.5px solid #bbf7d0; padding: 14px 18px; border-radius: 12px;">
-                                <div style="font-size: 15px; font-weight: 800; color: var(--success-dark); margin-bottom: 5px;">Nền Móng Sẵn Có</div>
-                                <div style="font-size: 13.5px; color: var(--text-sub); line-height: 1.5;">Tái sử dụng 100% CSDL tập trung và logic nghiệp vụ đã được làm sạch và chuẩn hóa ở Giai đoạn 1.</div>
+                        <!-- 3 CARD NGANG HÀNG CÂN ĐỐI -->
+                        <div class="grid-3" style="gap: 14px;">
+                            <div style="background: #f0fdf4; border: 1.5px solid #bbf7d0; padding: 12px 16px; border-radius: 10px;">
+                                <div style="font-size: 14px; font-weight: 800; color: var(--success-dark); margin-bottom: 5px;">🏛️ Tận Dụng Base Dữ Liệu GĐ1</div>
+                                <div style="font-size: 12.8px; color: var(--text-sub); line-height: 1.5;">Tái sử dụng 100% CSDL Database Hub và danh mục đã chuẩn hóa sạch từ Giai đoạn 1; tiết kiệm tối đa ngân sách và thời gian đầu tư của Trường.</div>
                             </div>
-                            <div style="background: #f0fdf4; border: 1.5px solid #bbf7d0; padding: 14px 18px; border-radius: 12px;">
-                                <div style="font-size: 15px; font-weight: 800; color: var(--success-dark); margin-bottom: 5px;">Quản Trị Đại Học Số</div>
-                                <div style="font-size: 13.5px; color: var(--text-sub); line-height: 1.5;">Xây dựng các cổng Web tác nghiệp chuyên sâu cho từng phòng ban (Nhân sự, CSVC, NCKH, Đào tạo...).</div>
+
+                            <div style="background: #f0fdf4; border: 1.5px solid #bbf7d0; padding: 12px 16px; border-radius: 10px;">
+                                <div style="font-size: 14px; font-weight: 800; color: var(--success-dark); margin-bottom: 5px;">🌐 Xây Dựng Các Cổng Tác Nghiệp</div>
+                                <div style="font-size: 12.8px; color: var(--text-sub); line-height: 1.5;">Mở rộng các phân hệ điều hành số: Cổng Giảng viên, Cổng Sinh viên, Quản trị Nhân sự, Quản lý Đào tạo tín chỉ, Tài chính số...</div>
                             </div>
-                            <div style="background: #f0fdf4; border: 1.5px solid #bbf7d0; padding: 14px 18px; border-radius: 12px;">
-                                <div style="font-size: 15px; font-weight: 800; color: var(--success-dark); margin-bottom: 5px;">Đồng Bộ Tự Động Quanh Năm</div>
-                                <div style="font-size: 13.5px; color: var(--text-sub); line-height: 1.5;">Dữ liệu vận hành hằng ngày tự động đồng bộ lên HEMIS quanh năm (Auto-Sync), không lãng phí chi phí đầu tư.</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
 
-        <!-- ==================== SLIDE 3: DANH SÁCH 13 PHÂN HỆ ==================== -->
-        <div class="slide">
-            <div class="slide-header">
-                <div class="brand-group">
-                    <span class="brand-badge">LDA</span>
-                    <span class="brand-name">TRƯỜNG ĐẠI HỌC CÔNG ĐOÀN</span>
-                </div>
-                <div class="category-pill">CHUẨN HÓA PHÂN HỆ</div>
-            </div>
-            <div class="slide-body">
-                <div class="slide-title-block">
-                    <h2 class="slide-title">Danh Sách 13 Phân Hệ Chuẩn Hóa Theo Bộ GD&ĐT</h2>
-                    <p class="slide-desc">5 Phân hệ cốt lõi quyết định chỉ tiêu tuyển sinh • 8 Phân hệ nghiệp vụ bổ trợ</p>
-                </div>
-
-                <div class="grid-2">
-                    <!-- Bảng 1: 5 Nhóm Đào tạo lõi -->
-                    <div class="card" style="border: 2px solid var(--primary); padding: 20px 24px;">
-                        <div>
-                            <div style="font-size: 17px; font-weight: 800; color: var(--primary-dark); margin-bottom: 14px;">
-                                ⭐ 5 PHÂN HỆ CỐT LÕI (QUYẾT ĐỊNH CHỈ TIÊU TUYỂN SINH)
-                            </div>
-                            <div style="display: flex; flex-direction: column; gap: 11px;">
-                                <div style="background: var(--primary-light); border: 1.5px solid var(--primary-border); padding: 12px 16px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center;">
-                                    <div>
-                                        <div style="font-size: 16.5px; font-weight: 800; color: var(--text-main);">1. Ngành Đào Tạo</div>
-                                        <div style="font-size: 13.5px; color: var(--text-muted); margin-top: 2px;">Phòng Quản lý Đào tạo</div>
-                                    </div>
-                                    <span style="font-size: 13px; font-weight: 800; background: var(--primary); color: #fff; padding: 5px 12px; border-radius: 6px;">SQL Auto</span>
-                                </div>
-
-                                <div style="background: var(--primary-light); border: 1.5px solid var(--primary-border); padding: 12px 16px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center;">
-                                    <div>
-                                        <div style="font-size: 16.5px; font-weight: 800; color: var(--text-main);">2. Chương Trình Đào Tạo (CTĐT)</div>
-                                        <div style="font-size: 13.5px; color: var(--text-muted); margin-top: 2px;">P. Quản lý Đào tạo / P. Quản lý Chất lượng</div>
-                                    </div>
-                                    <span style="font-size: 13px; font-weight: 800; background: var(--primary); color: #fff; padding: 5px 12px; border-radius: 6px;">SQL Auto</span>
-                                </div>
-
-                                <div style="background: var(--primary-light); border: 1.5px solid var(--primary-border); padding: 12px 16px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center;">
-                                    <div>
-                                        <div style="font-size: 16.5px; font-weight: 800; color: var(--text-main);">3. Đội Ngũ Cán Bộ, Giảng Viên</div>
-                                        <div style="font-size: 13.5px; color: var(--text-muted); margin-top: 2px;">Phòng Tổ chức Cán bộ</div>
-                                    </div>
-                                    <span style="font-size: 13px; font-weight: 800; background: var(--primary); color: #fff; padding: 5px 12px; border-radius: 6px;">Excel/Hồ sơ</span>
-                                </div>
-
-                                <div style="background: var(--primary-light); border: 1.5px solid var(--primary-border); padding: 12px 16px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center;">
-                                    <div>
-                                        <div style="font-size: 16.5px; font-weight: 800; color: var(--text-main);">4. Người Học (Sinh Viên, Học Viên)</div>
-                                        <div style="font-size: 13.5px; color: var(--text-muted); margin-top: 2px;">P. Quản lý Đào tạo / P. Công tác Sinh viên</div>
-                                    </div>
-                                    <span style="font-size: 13px; font-weight: 800; background: var(--primary); color: #fff; padding: 5px 12px; border-radius: 6px;">SQL Auto</span>
-                                </div>
-
-                                <div style="background: var(--primary-light); border: 1.5px solid var(--primary-border); padding: 12px 16px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center;">
-                                    <div>
-                                        <div style="font-size: 16.5px; font-weight: 800; color: var(--text-main);">5. Tuyển Sinh (Chỉ Tiêu & Trúng Tuyển)</div>
-                                        <div style="font-size: 13.5px; color: var(--text-muted); margin-top: 2px;">Phòng Quản lý Đào tạo</div>
-                                    </div>
-                                    <span style="font-size: 13px; font-weight: 800; background: var(--primary); color: #fff; padding: 5px 12px; border-radius: 6px;">SQL Auto</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Bảng 2: 8 Nhóm Bổ trợ -->
-                    <div class="card" style="border: 2px solid var(--warning); padding: 20px 24px;">
-                        <div>
-                            <div style="font-size: 17px; font-weight: 800; color: var(--warning-dark); margin-bottom: 14px;">
-                                📑 8 PHÂN HỆ NGHIỆP VỤ BỔ TRỢ (FILE EXCEL PHÒNG BAN)
-                            </div>
-                            <div style="display: flex; flex-direction: column; gap: 8px;">
-                                <div style="background: var(--warning-light); border: 1px solid var(--warning-border); padding: 9px 14px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center;">
-                                    <span style="font-size: 15px; font-weight: 700; color: var(--text-main);">6. Cơ Sở Giáo Dục & Kiểm Định</span>
-                                    <span style="font-size: 13px; color: var(--text-muted); font-weight: 600;">P. QLCL / Phòng Hành chính</span>
-                                </div>
-                                <div style="background: var(--warning-light); border: 1px solid var(--warning-border); padding: 9px 14px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center;">
-                                    <span style="font-size: 15px; font-weight: 700; color: var(--text-main);">7. Hội Đồng Trường & Ban Giám Hiệu</span>
-                                    <span style="font-size: 13px; color: var(--text-muted); font-weight: 600;">Phòng Tổ chức Cán bộ</span>
-                                </div>
-                                <div style="background: var(--warning-light); border: 1px solid var(--warning-border); padding: 9px 14px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center;">
-                                    <span style="font-size: 15px; font-weight: 700; color: var(--text-main);">8. Cơ Sở Vật Chất & Đất Đai</span>
-                                    <span style="font-size: 13px; color: var(--text-muted); font-weight: 600;">Phòng Hành chính - Quản trị</span>
-                                </div>
-                                <div style="background: var(--warning-light); border: 1px solid var(--warning-border); padding: 9px 14px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center;">
-                                    <span style="font-size: 15px; font-weight: 700; color: var(--text-main);">9. Khoa Học Công Nghệ, Đề Tài, Bài Báo</span>
-                                    <span style="font-size: 13px; color: var(--text-muted); font-weight: 600;">Phòng QLKH & TTTL</span>
-                                </div>
-                                <div style="background: var(--warning-light); border: 1px solid var(--warning-border); padding: 9px 14px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center;">
-                                    <span style="font-size: 15px; font-weight: 700; color: var(--text-main);">10. Tài Chính & Tài Sản</span>
-                                    <span style="font-size: 13px; color: var(--text-muted); font-weight: 600;">Phòng Tài chính - Kế toán</span>
-                                </div>
-                                <div style="background: var(--warning-light); border: 1px solid var(--warning-border); padding: 9px 14px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center;">
-                                    <span style="font-size: 15px; font-weight: 700; color: var(--text-main);">11. Hợp Tác Quốc Tế</span>
-                                    <span style="font-size: 13px; color: var(--text-muted); font-weight: 600;">Viện ĐT, BD & HTQT</span>
-                                </div>
-                                <div style="background: var(--warning-light); border: 1px solid var(--warning-border); padding: 9px 14px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center;">
-                                    <span style="font-size: 15px; font-weight: 700; color: var(--text-main);">12. Hợp Tác Doanh Nghiệp & Việc Làm</span>
-                                    <span style="font-size: 13px; color: var(--text-muted); font-weight: 600;">P. GDCT & CTSV</span>
-                                </div>
-                                <div style="background: #fef2f2; border: 1px solid #fecaca; padding: 9px 14px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center;">
-                                    <span style="font-size: 15px; font-weight: 700; color: var(--danger);">13. Văn Bằng Tốt Nghiệp</span>
-                                    <span style="font-size: 13px; font-weight: 700; color: var(--danger);">P. QLĐT (Xuất Excel chuẩn Bộ)*</span>
-                                </div>
+                            <div style="background: #f0fdf4; border: 1.5px solid #bbf7d0; padding: 12px 16px; border-radius: 10px;">
+                                <div style="font-size: 14px; font-weight: 800; color: var(--success-dark); margin-bottom: 5px;">🔄 Tự Động Đồng Bộ Quanh Năm</div>
+                                <div style="font-size: 12.8px; color: var(--text-sub); line-height: 1.5;">Dữ liệu phát sinh hằng ngày từ các phân hệ tự động đồng bộ lên HEMIS quanh năm (Auto-Sync), không còn áp lực dồn báo cáo cuối kỳ.</div>
                             </div>
                         </div>
                     </div>
@@ -828,91 +786,236 @@
             </div>
         </div>
 
-        <!-- ==================== SLIDE 4: KẾ HOẠCH & KHẢ THI ==================== -->
+        <!-- ==================== SLIDE 3: TECHSTACK & SƠ ĐỒ LUỒNG KỸ THUẬT (CHUẨN KỸ THUẬT, ĐÁP ỨNG USER, SƠ ĐỒ 3 ZONE) ==================== -->
         <div class="slide">
             <div class="slide-header">
                 <div class="brand-group">
                     <span class="brand-badge">LDA</span>
                     <span class="brand-name">TRƯỜNG ĐẠI HỌC CÔNG ĐOÀN</span>
                 </div>
-                <div class="category-pill">KẾ HOẠCH & KHẢ THI</div>
+                <div class="category-pill">KIẾN TRÚC KỸ THUẬT</div>
             </div>
+
             <div class="slide-body">
                 <div class="slide-title-block">
-                    <h2 class="slide-title">Kế Hoạch Thực Hiện 30 Ngày & Đánh Giá Khả Thi</h2>
-                    <p class="slide-desc">Lộ trình 4 tuần rõ ràng và các yếu tố bảo đảm khả thi 100% cho Nhà trường</p>
+                    <h2 class="slide-title">Kiến Trúc Kỹ Thuật: Sơ Đồ Luồng & Năng Lực Đáp Ứng Hệ Thống</h2>
+                    <p class="slide-desc">Nền tảng công nghệ Golang & PostgreSQL: Đáp ứng tải thực tế của trường và sơ đồ luồng dữ liệu khép kín</p>
                 </div>
 
-                <div class="grid-2">
-                    <!-- Cột 1: 4 Tuần -->
-                    <div class="card" style="border: 2px solid var(--primary); padding: 22px 26px;">
-                        <div>
-                            <div style="font-size: 18px; font-weight: 800; color: var(--primary-dark); margin-bottom: 14px;">
-                                ⏱️ LỘ TRÌNH 4 TUẦN (GIAI ĐOẠN 1)
+                <div style="display: flex; flex-direction: column; justify-content: space-between; gap: 14px; flex: 1;">
+                    <!-- TOP: 2 CỘT CÂN ĐỐI (CÔNG NGHỆ THỰC TẾ & KHẢ NĂNG ĐÁP ỨNG SỐ LƯỢNG USER) -->
+                    <div class="grid-2" style="gap: 16px;">
+                        <!-- Cột 1: CÔNG NGHỆ NỀN TẢNG THỰC TẾ (BỎ QUẢNG CÁO) -->
+                        <div class="card" style="border: 2px solid var(--primary); padding: 13px 18px; gap: 6px;">
+                            <div style="font-size: 15.5px; font-weight: 800; color: var(--primary-dark); margin-bottom: 2px;">
+                                🛠️ Công Nghệ Nền Tảng (Core Technologies)
                             </div>
-                            <div style="display: flex; flex-direction: column; gap: 11px;">
-                                <div style="background: var(--primary-light); padding: 12px 16px; border-radius: 10px;">
-                                    <div style="font-size: 16px; font-weight: 800; color: var(--text-main);">Tuần 1: Hạ Tầng & Nhóm Đào Tạo Cốt Lõi</div>
-                                    <div style="font-size: 13.5px; color: var(--text-sub); margin-top: 3px;">Kết nối Cổng Bộ test, nạp SQL đào tạo, tiếp nhận file Excel các phòng ban.</div>
+                            <div style="font-size: 12.5px; color: var(--text-sub); line-height: 1.5; display: flex; flex-direction: column; gap: 5px;">
+                                <div>
+                                    <strong>• Backend Golang (Go):</strong> Ngôn ngữ biên dịch mã máy native, kiến trúc Concurrency đa luồng (Goroutines) xử lý I/O non-blocking, tiêu thụ bộ nhớ thấp (~50–100MB RAM), tích hợp sẵn thư viện ký số W3C XML-DSig và client HTTP/2.
                                 </div>
-
-                                <div style="background: #f1f5f9; padding: 12px 16px; border-radius: 10px;">
-                                    <div style="font-size: 16px; font-weight: 800; color: var(--text-main);">Tuần 2: Chuẩn Hóa Cán Bộ GV & Cơ Sở Vật Chất</div>
-                                    <div style="font-size: 13.5px; color: var(--text-sub); margin-top: 3px;">Quét sạch lỗi CCCD 12 số, phân công giảng dạy, trả file sửa lỗi nhanh cho các phòng.</div>
+                                <div>
+                                    <strong>• CSDL Trung Tâm PostgreSQL:</strong> Hệ quản trị CSDL quan hệ chuẩn doanh nghiệp, tuân thủ ACID toàn vẹn dữ liệu, lưu trữ kết hợp bảng quan hệ và JSONB linh hoạt, hỗ trợ Indexing B-Tree/GIN tối ưu truy vấn lớn.
                                 </div>
-
-                                <div style="background: #f1f5f9; padding: 12px 16px; border-radius: 10px;">
-                                    <div style="font-size: 16px; font-weight: 800; color: var(--text-main);">Tuần 3: Các Phân Hệ Chuyên Môn & Duyệt Số Liệu</div>
-                                    <div style="font-size: 13.5px; color: var(--text-sub); margin-top: 3px;">NCKH, Tài chính, HTQT, HTDN, Văn bằng. Trưởng phòng kiểm tra & duyệt trên web.</div>
+                                <div>
+                                    <strong>• Đóng gói Docker:</strong> Triển khai On-Premise khép kín trong mạng nội bộ trường, dễ dàng bảo trì và sao lưu định kỳ.
                                 </div>
+                            </div>
+                        </div>
 
-                                <div style="background: var(--primary-light); padding: 12px 16px; border-radius: 10px;">
-                                    <div style="font-size: 16px; font-weight: 800; color: var(--text-main);">Tuần 4: Ký Số Điện Tử & Nộp Cổng HEMIS</div>
-                                    <div style="font-size: 13.5px; color: var(--text-sub); margin-top: 3px;">Đóng gói XML-DSig, gửi API Cổng Bộ. Hoàn thành nghĩa vụ & chốt chỉ tiêu tuyển sinh.</div>
+                        <!-- Cột 2: NĂNG LỰC ĐÁP ỨNG SỐ LƯỢNG USER & TẢI HỆ THỐNG -->
+                        <div class="card" style="border: 2px solid var(--success); padding: 13px 18px; gap: 6px;">
+                            <div style="font-size: 15.5px; font-weight: 800; color: var(--success-dark); margin-bottom: 2px;">
+                                📊 Năng Lực Đáp Ứng Số Lượng User & Chịu Tải
+                            </div>
+                            <div style="font-size: 12.5px; color: var(--text-sub); line-height: 1.5; display: flex; flex-direction: column; gap: 5px;">
+                                <div>
+                                    <strong>• Năng lực xử lý đồng thời (Concurrency):</strong> Chịu tải <strong>3.000 – 5.000 yêu cầu/giây (RPS)</strong> trên cấu hình máy chủ thông thường (4–8 Core CPU, 8–16 GB RAM).
+                                </div>
+                                <div>
+                                    <strong>• Quy mô phục vụ người dùng:</strong> Đáp ứng <strong>20.000 – 30.000 sinh viên và cán bộ giảng viên</strong> truy cập cùng lúc trong các đợt cao điểm (đăng ký tín chỉ, xem điểm thi, đóng học phí) với độ trễ phản hồi &lt; 50ms.
+                                </div>
+                                <div>
+                                    <strong>• Khối lượng dữ liệu:</strong> Xử lý mượt mà CSDL quy mô <strong>hàng chục triệu bản ghi</strong> (lịch sử đào tạo, kết quả học tập qua các khóa, hồ sơ nhân sự nhiều năm).
+                                </div>
+                                <div>
+                                    <strong>• Đồng bộ nền:</strong> Đẩy hàng trăm nghìn dòng dữ liệu lên Cổng Bộ chỉ mất vài phút ở chế độ worker nền.
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Cột 2: Khả thi & Phối hợp -->
-                    <div class="card" style="border: 2px solid var(--success); padding: 22px 26px;">
-                        <div>
-                            <div style="font-size: 18px; font-weight: 800; color: var(--success-dark); margin-bottom: 14px;">
-                                🛡️ ĐÁNH GIÁ MỨC ĐỘ KHẢ THI
-                            </div>
+                    <!-- BOTTOM: SƠ ĐỒ LUỒNG KIẾN TRÚC HOÀN CHỈNH (TƯƠNG TỰ ẢNH THIẾT KẾ 3 PHÂN VÙNG) -->
+                    <div class="card" style="border: 2px solid #cbd5e1; padding: 12px 18px; background: #ffffff;">
+                        <div style="font-size: 13.5px; font-weight: 800; color: var(--text-main); margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between;">
+                            <span>🔄 SƠ ĐỒ LUỒNG KIẾN TRÚC HỆ THỐNG (SYSTEM ARCHITECTURE DIAGRAM)</span>
+                            <span style="font-size: 11.5px; color: var(--text-muted); font-weight: 600;">3 Phân vùng xử lý khép kín: Nội bộ trường ➔ Ký số & Adapter ➔ Cổng HEMIS Bộ GD&ĐT</span>
+                        </div>
 
-                            <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 14px;">
-                                <div>
-                                    <div style="font-size: 15.5px; font-weight: 800; color: var(--text-main);">1. Đã Có Khung Kiến Trúc & Bản Demo Thử Nghiệm (PoC)</div>
-                                    <div style="font-size: 13.5px; color: var(--text-sub); line-height: 1.5; margin-top: 2px;">
-                                        Đã có giải pháp kỹ thuật và <strong>bản demo PoC chạy thử nghiệm</strong> chứng minh luồng xử lý vận hành được (sẽ show trực tiếp sau slide này). <em>Lưu ý: Đây là bản demo thử nghiệm chứng minh phương án, chưa phải phần mềm triển khai hoàn chỉnh thật tại trường.</em>
+                        <!-- 3 PHÂN VÙNG LIÊN KẾT BẰNG MŨI TÊN (TƯƠNG TỰ ẢNH ĐÃ GEN) -->
+                        <div style="display: flex; gap: 10px; align-items: stretch;">
+                            <!-- ZONE 1: HẠ TẦNG TRƯỜNG ĐH CÔNG ĐOÀN -->
+                            <div style="flex: 2.3; border: 1.8px solid #0284c7; border-radius: 10px; background: #f8fafc; padding: 9px 12px; display: flex; flex-direction: column; gap: 6px;">
+                                <div style="font-size: 12px; font-weight: 800; color: #0369a1; text-align: center; background: #e0f2fe; padding: 4px 8px; border-radius: 6px;">
+                                    HẠ TẦNG TRƯỜNG ĐH CÔNG ĐOÀN (School Infrastructure)
+                                </div>
+                                <div style="display: flex; gap: 8px; flex: 1; align-items: center;">
+                                    <!-- Nguồn dữ liệu -->
+                                    <div style="flex: 1; display: flex; flex-direction: column; gap: 5px;">
+                                        <div style="background: #ffffff; border: 1px solid #cbd5e1; border-radius: 6px; padding: 5px 7px; text-align: center;">
+                                            <div style="font-size: 11px; font-weight: 800; color: var(--text-main);">SQL Server Đào Tạo</div>
+                                            <div style="font-size: 9.5px; color: var(--text-muted);">Read-Only Database</div>
+                                        </div>
+                                        <div style="background: #ffffff; border: 1px solid #cbd5e1; border-radius: 6px; padding: 5px 7px; text-align: center;">
+                                            <div style="font-size: 11px; font-weight: 800; color: var(--text-main);">Excel Các Phòng</div>
+                                            <div style="font-size: 9.5px; color: var(--text-muted);">TCCB, CSVC, NCKH</div>
+                                        </div>
+                                    </div>
+                                    <span style="font-size: 14px; color: #0284c7; font-weight: 800;">➔</span>
+                                    <!-- Postgres Central Hub -->
+                                    <div style="flex: 1.2; background: #eff6ff; border: 1.5px solid #93c5fd; border-radius: 8px; padding: 8px 8px; text-align: center;">
+                                        <div style="font-size: 12px; font-weight: 800; color: #1e3a8a;">🐘 PostgreSQL Hub</div>
+                                        <div style="font-size: 10px; color: #1e40af; margin-top: 2px;">Database Trung Tâm</div>
+                                        <div style="font-size: 9px; color: var(--text-muted); margin-top: 2px;">Core Tables • Staging<br>Danh mục &gt;175 mã chuẩn</div>
+                                    </div>
+                                    <span style="font-size: 14px; color: #0284c7; font-weight: 800;">➔</span>
+                                    <!-- Golang Core Engine -->
+                                    <div style="flex: 1.2; background: #e0f2fe; border: 1.5px solid #7dd3fc; border-radius: 8px; padding: 8px 8px; text-align: center;">
+                                        <div style="font-size: 12px; font-weight: 800; color: #0369a1;">⚡ Golang Core Service</div>
+                                        <div style="font-size: 10px; color: #0284c7; margin-top: 2px;">Xử Lý &amp; Đối Soát</div>
+                                        <div style="font-size: 9px; color: var(--text-muted); margin-top: 2px;">Auto-Mapping Engine<br>Validation kiểm tra lỗi</div>
                                     </div>
                                 </div>
+                            </div>
 
-                                <div>
-                                    <div style="font-size: 15.5px; font-weight: 800; color: var(--text-main);">2. Không Bắt Trường Gõ Lại Từ Đầu</div>
-                                    <div style="font-size: 13.5px; color: var(--text-sub); line-height: 1.5; margin-top: 2px;">
-                                        Kéo tự động từ CSDL Đào tạo hiện có; các phòng ban khác chỉ cần nộp file Excel sẵn có theo mẫu chuẩn của Bộ.
-                                    </div>
+                            <!-- MŨI TÊN KẾT NỐI SANG ZONE 2 -->
+                            <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 2px; flex-shrink: 0;">
+                                <span style="font-size: 16px; color: #4f46e5; font-weight: 800;">➔</span>
+                                <span style="font-size: 9.5px; font-weight: 800; color: #4f46e5;">Nội bộ</span>
+                            </div>
+
+                            <!-- ZONE 2: CẦU NỐI KÝ SỐ & ADAPTER API -->
+                            <div style="flex: 1.5; border: 1.8px solid #4f46e5; border-radius: 10px; background: #f5f3ff; padding: 9px 12px; display: flex; flex-direction: column; gap: 6px;">
+                                <div style="font-size: 12px; font-weight: 800; color: #3730a3; text-align: center; background: #e0e7ff; padding: 4px 8px; border-radius: 6px;">
+                                    CẦU NỐI KÝ SỐ &amp; ADAPTER API
                                 </div>
-
-                                <div>
-                                    <div style="font-size: 15.5px; font-weight: 800; color: var(--text-main);">3. Kế Hoạch Phòng Vệ An Toàn Tuyệt Đối</div>
-                                    <div style="font-size: 13.5px; color: var(--text-sub); line-height: 1.5; margin-top: 2px;">
-                                        Nếu phòng ngoài lề bị trễ, chốt chắc chắn 5 mục cốt lõi trước để bảo toàn 100% chỉ tiêu tuyển sinh cho Nhà trường.
+                                <div style="display: flex; flex-direction: column; gap: 5px; flex: 1; justify-content: center;">
+                                    <div style="background: #ffffff; border: 1.2px solid #c7d2fe; border-radius: 6px; padding: 5px 8px; text-align: center;">
+                                        <div style="font-size: 11px; font-weight: 800; color: #4338ca;">⚡ Golang Adapter Service</div>
+                                        <div style="font-size: 9.5px; color: var(--text-muted);">Chuẩn hóa payload theo đặc tả API HEMIS</div>
+                                    </div>
+                                    <div style="background: #ffffff; border: 1.2px solid #c7d2fe; border-radius: 6px; padding: 5px 8px; text-align: center;">
+                                        <div style="font-size: 11px; font-weight: 800; color: #4338ca;">🔏 Engine Ký Số (IDigitalSigner)</div>
+                                        <div style="font-size: 9.5px; color: var(--text-muted);">USB Token / SmartCA ➔ Đóng gói XML-DSig</div>
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- Điều kiện phối hợp từ phía Nhà trường (Đã bỏ chữ quyết liệt) -->
-                            <div style="background: var(--warning-light); border: 1.5px solid var(--warning-border); padding: 12px 16px; border-radius: 10px;">
-                                <div style="font-size: 14px; font-weight: 800; color: var(--warning-dark); margin-bottom: 4px;">🤝 ĐIỀU KIỆN PHỐI HỢP TỪ PHÍA NHÀ TRƯỜNG:</div>
-                                <div style="font-size: 13px; color: #78350F; line-height: 1.5;">
-                                    • Cử 01 đầu mối (POC) mỗi phòng ban ngay tại cuộc họp hôm nay.<br>
-                                    • Bàn giao CSDL Đào tạo & các file Excel trong 5-7 ngày đầu.<br>
-                                    • Trưởng phòng ban kiểm tra và duyệt dữ liệu cuốn chiếu trên web.
+                            <!-- MŨI TÊN KẾT NỐI SANG ZONE 3 -->
+                            <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 2px; flex-shrink: 0;">
+                                <span style="font-size: 16px; color: #059669; font-weight: 800;">➔</span>
+                                <span style="font-size: 9.5px; font-weight: 800; color: #059669;">HTTPS</span>
+                            </div>
+
+                            <!-- ZONE 3: CỔNG HEMIS BỘ GD&ĐT -->
+                            <div style="flex: 1.5; border: 1.8px solid #059669; border-radius: 10px; background: #f0fdf4; padding: 9px 12px; display: flex; flex-direction: column; gap: 6px;">
+                                <div style="font-size: 12px; font-weight: 800; color: #065f46; text-align: center; background: #d1fae5; padding: 4px 8px; border-radius: 6px;">
+                                    CỔNG HEMIS BỘ GD&amp;ĐT (National Gateway)
+                                </div>
+                                <div style="display: flex; flex-direction: column; gap: 5px; flex: 1; justify-content: center;">
+                                    <div style="background: #ffffff; border: 1.2px solid #a7f3d0; border-radius: 6px; padding: 5px 8px; text-align: center;">
+                                        <div style="font-size: 11px; font-weight: 800; color: #047857;">🔒 SSO OAuth2 Gateway</div>
+                                        <div style="font-size: 9.5px; color: var(--text-muted);">Xác thực tài khoản chính thức của Trường</div>
+                                    </div>
+                                    <div style="background: #ffffff; border: 1.2px solid #a7f3d0; border-radius: 6px; padding: 5px 8px; text-align: center;">
+                                        <div style="font-size: 11px; font-weight: 800; color: #047857;">🏛️ CSDL Quốc Gia Bộ GD&amp;ĐT</div>
+                                        <div style="font-size: 9.5px; color: var(--text-muted);">Tiếp nhận XML ký số &amp; 13 gói tin nghiệp vụ</div>
+                                    </div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== SLIDE 4: YÊU CẦU PHÍA NHÀ TRƯỜNG CẦN CHUẨN BỊ & CUNG CẤP (ĐÃ BỎ HÀNG XANH QUẢNG CÁO) ==================== -->
+        <div class="slide">
+            <div class="slide-header">
+                <div class="brand-group">
+                    <span class="brand-badge">LDA</span>
+                    <span class="brand-name">TRƯỜNG ĐẠI HỌC CÔNG ĐOÀN</span>
+                </div>
+                <div class="category-pill">KẾ HOẠCH PHỐI HỢP</div>
+            </div>
+
+            <div class="slide-body">
+                <div class="slide-title-block">
+                    <h2 class="slide-title">Yêu Cầu Phối Hợp: Nội Dung Nhà Trường Cần Chuẩn Bị & Cung Cấp</h2>
+                    <p class="slide-desc">Sự phối hợp chặt chẽ và kịp thời từ các đơn vị là yếu tố then chốt để đảm bảo hoàn thành đúng hạn 1 tháng</p>
+                </div>
+
+                <div style="display: flex; flex-direction: column; justify-content: center; flex: 1;">
+                    <!-- 4 NHÓM YÊU CẦU (GRID 2x2 CĂN ĐỀU RÕ RÀNG, KHÔNG CÒN BANNER QUẢNG CÁO DƯỚI CÙNG) -->
+                    <div class="grid-2x2">
+                        <!-- MỤC 1: NHÂN SỰ ĐẦU MỐI -->
+                        <div class="card" style="border: 2px solid var(--primary); padding: 18px 22px; gap: 8px;">
+                            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 2px;">
+                                <div style="font-size: 16.5px; font-weight: 800; color: var(--primary-dark);">
+                                    👥 1. Nhân Sự Đầu Mối Phối Hợp (Team POCs)
+                                </div>
+                                <span style="background: var(--primary-light); color: var(--primary-dark); font-size: 11px; font-weight: 800; padding: 3px 8px; border-radius: 6px;">Nhân Sự</span>
+                            </div>
+                            <ul style="font-size: 13px; color: var(--text-sub); line-height: 1.5; padding-left: 18px; display: flex; flex-direction: column; gap: 6px;">
+                                <li><strong>01 Cán bộ kỹ thuật CNTT của Trường:</strong> Hỗ trợ kết nối mạng, mở cổng IP và phối hợp thiết lập máy chủ triển khai.</li>
+                                <li><strong>Đầu mối chuyên quản phòng ban:</strong> Mỗi đơn vị (Đào tạo, TCCB, CSVC, QLKH, Tài chính) cử 01 chuyên viên phụ trách đối soát và giải nghĩa dữ liệu.</li>
+                                <li><strong>Thẩm quyền phê duyệt:</strong> Lãnh đạo các đơn vị kiểm tra số liệu phòng mình trên giao diện web và bấm "Xác nhận duyệt" trước khi ký số nộp Bộ.</li>
+                            </ul>
+                        </div>
+
+                        <!-- MỤC 2: KẾT NỐI KỸ THUẬT & DỮ LIỆU -->
+                        <div class="card" style="border: 2px solid var(--warning); padding: 18px 22px; gap: 8px;">
+                            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 2px;">
+                                <div style="font-size: 16.5px; font-weight: 800; color: var(--warning-dark);">
+                                    🗄️ 2. Kết Nối CSDL & File Excel Nghiệp Vụ
+                                </div>
+                                <span style="background: var(--warning-light); color: var(--warning-dark); font-size: 11px; font-weight: 800; padding: 3px 8px; border-radius: 6px;">Dữ Liệu</span>
+                            </div>
+                            <ul style="font-size: 13px; color: var(--text-sub); line-height: 1.5; padding-left: 18px; display: flex; flex-direction: column; gap: 6px;">
+                                <li><strong>Tài khoản CSDL Quản lý Đào tạo:</strong> Cung cấp tài khoản SQL Server quyền <strong>Read-Only</strong> (chỉ đọc, tuyệt đối không chỉnh sửa dữ liệu gốc) hoặc cấp bản View/Backup dữ liệu.</li>
+                                <li><strong>Biểu mẫu Excel chuyên môn:</strong> Bàn giao file Excel hồ sơ cán bộ (TCCB), cơ sở vật chất (CSVC), đề tài NCKH, danh sách tốt nghiệp theo mẫu trong 5-7 ngày đầu.</li>
+                                <li><strong>Tài liệu đặc tả (nếu có):</strong> Cung cấp sơ đồ bảng dữ liệu đào tạo để đội kỹ thuật ánh xạ nhanh chóng.</li>
+                            </ul>
+                        </div>
+
+                        <!-- MỤC 3: TÀI KHOẢN CỔNG BỘ & CHỮ KÝ SỐ -->
+                        <div class="card" style="border: 2px solid var(--indigo); padding: 18px 22px; gap: 8px;">
+                            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 2px;">
+                                <div style="font-size: 16.5px; font-weight: 800; color: var(--indigo-dark);">
+                                    🔑 3. Tài Khoản Cổng HEMIS & Chữ Ký Số Hợp Lệ
+                                </div>
+                                <span style="background: var(--indigo-light); color: var(--indigo-dark); font-size: 11px; font-weight: 800; padding: 3px 8px; border-radius: 6px;">Pháp Lý</span>
+                            </div>
+                            <ul style="font-size: 13px; color: var(--text-sub); line-height: 1.5; padding-left: 18px; display: flex; flex-direction: column; gap: 6px;">
+                                <li><strong>Tài khoản Cổng HEMIS Bộ GD&ĐT:</strong> Cung cấp tài khoản quản trị Cổng HEMIS (Client ID / Client Secret hoặc tài khoản portal) do Bộ cấp cho Nhà trường.</li>
+                                <li><strong>USB Token Ký số điện tử:</strong> Chữ ký số mang tư cách pháp nhân của Trường Đại học Công Đoàn (USB Token hoặc SmartCA hợp lệ) để ký số các gói tin XML.</li>
+                                <li><strong>Phối hợp cắm USB Token:</strong> Bố trí máy tính kết nối USB Token trong ngày thực hiện ký số chính thức (Tuần 4).</li>
+                            </ul>
+                        </div>
+
+                        <!-- MỤC 4: HẠ TẦNG MÁY CHỦ -->
+                        <div class="card" style="border: 2px solid var(--success); padding: 18px 22px; gap: 8px;">
+                            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 2px;">
+                                <div style="font-size: 16.5px; font-weight: 800; color: var(--success-dark);">
+                                    🖥️ 4. Hạ Tầng Máy Chủ Triển Khai (Server / VPS)
+                                </div>
+                                <span style="background: var(--success-light); color: var(--success-dark); font-size: 11px; font-weight: 800; padding: 3px 8px; border-radius: 6px;">Hạ Tầng</span>
+                            </div>
+                            <ul style="font-size: 13px; color: var(--text-sub); line-height: 1.5; padding-left: 18px; display: flex; flex-direction: column; gap: 6px;">
+                                <li><strong>Cấu hình tối thiểu:</strong> 01 máy chủ vật lý hoặc VPS nội bộ trường (Khuyến nghị: 4-8 vCPU, 8-16 GB RAM, 100 GB SSD, OS Linux/Ubuntu Server hoặc Windows Server).</li>
+                                <li><strong>Môi trường Docker:</strong> Hỗ trợ cài đặt Docker để chạy hệ thống TUU Data Hub & Adapter API nội bộ trường khép kín, an toàn tuyệt đối.</li>
+                                <li><strong>Đường truyền mạng:</strong> Máy chủ có kết nối Internet để gọi API sang Cổng Bộ GD&ĐT qua cổng HTTPS (443).</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
