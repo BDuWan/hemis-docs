@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Báo Cáo Mô Hình Tích Hợp Dữ Liệu HEMIS - Trường ĐH Công Đoàn</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-page: #f8fafc;
+            --bg-card: #ffffff;
+            --border-card: #cbd5e1;
+            --border-hover: #94a3b8;
+            
+            --text-main: #0f172a;
+            --text-sub: #334155;
+            --text-muted: #64748b;
+            
+            --primary: #0284c7;
+            --primary-dark: #0369a1;
+            --primary-light: #e0f2fe;
+            --primary-border: #bae6fd;
+            
+            --success: #059669;
+            --success-dark: #047857;
+            --success-light: #d1fae5;
+            --success-border: #a7f3d0;
+            
+            --warning: #d97706;
+            --warning-dark: #b45309;
+            --warning-light: #fef3c7;
+            --warning-border: #fde68a;
+            
+            --danger: #dc2626;
+            --danger-light: #fee2e2;
+            --danger-border: #fecaca;
+            
+            --font-main: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+            --shadow-card: 0 4px 10px -2px rgba(15, 23, 42, 0.06), 0 2px 4px -1px rgba(15, 23, 42, 0.04);
+            --shadow-hover: 0 10px 20px -3px rgba(15, 23, 42, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-page);
+            color: var(--text-main);
+            font-family: var(--font-main);
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+            user-select: none;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .slide-deck {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .slide {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 20px 48px 92px 48px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(6px);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            background: var(--bg-page);
+        }
+
+        .slide.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        /* Header */
+        .slide-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--border-card);
+            padding-bottom: 12px;
+            margin-bottom: 14px;
+            flex-shrink: 0;
+        }
+
+        .brand-group {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .brand-badge {
+            background: var(--primary);
+            color: #ffffff;
+            font-size: 14px;
+            font-weight: 800;
+            padding: 6px 14px;
+            border-radius: 8px;
+            letter-spacing: 0.5px;
+        }
+
+        .brand-name {
+            font-size: 16px;
+            font-weight: 800;
+            color: var(--text-muted);
+            letter-spacing: 0.3px;
+        }
+
+        .category-pill {
+            font-size: 14px;
+            font-weight: 800;
+            color: var(--primary);
+            background: var(--primary-light);
+            border: 1.5px solid var(--primary-border);
+            padding: 6px 18px;
+            border-radius: 20px;
+            letter-spacing: 0.3px;
+        }
+
+        /* Slide Titles */
+        .slide-title-block {
+            margin-bottom: 14px;
+            flex-shrink: 0;
+        }
+
+        .slide-title {
+            font-size: 34px;
+            font-weight: 800;
+            color: var(--text-main);
+            letter-spacing: -0.6px;
+            line-height: 1.25;
+        }
+
+        .slide-desc {
+            font-size: 16.5px;
+            color: var(--text-muted);
+            margin-top: 5px;
+            font-weight: 600;
+        }
+
+        .slide-body {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 0;
+        }
+
+        /* ==================== SLIDE 1: HỘI TỤ MŨI TÊN CHÉO ==================== */
+        .flow-diagram-s1 {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0;
+            flex: 1;
+            min-height: 0;
+        }
+
+        /* Cột 1: 4 ô vuông phân tán, tách rời xa nhau, chiều ngang bé lại */
+        .scattered-col {
+            width: 255px;
+            height: 385px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            flex-shrink: 0;
+        }
+
+        .scattered-card {
+            background: #ffffff;
+            border: 2px solid var(--warning);
+            border-radius: 12px;
+            padding: 8px 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow-card);
+            height: 66px;
+            transition: all 0.2s ease;
+        }
+
+        .scattered-card:hover {
+            box-shadow: var(--shadow-hover);
+            transform: translateX(2px);
+            border-color: var(--warning-dark);
+        }
+
+        .scattered-title {
+            font-size: 14px;
+            font-weight: 800;
+            color: var(--text-main);
+            line-height: 1.3;
+        }
+
+        .scattered-sub {
+            font-size: 11.5px;
+            color: var(--text-muted);
+            margin-top: 2px;
+            font-weight: 500;
+            line-height: 1.3;
+        }
+
+        .scattered-badge {
+            font-size: 11px;
+            font-weight: 800;
+            padding: 4px 8px;
+            border-radius: 6px;
+            white-space: nowrap;
+            margin-left: 6px;
+            flex-shrink: 0;
+        }
+
+        .badge-sql {
+            background: var(--primary-light);
+            color: var(--primary-dark);
+        }
+
+        .badge-excel {
+            background: var(--warning-light);
+            color: var(--warning-dark);
+        }
+
+        .badge-paper {
+            background: #f1f5f9;
+            color: var(--text-muted);
+        }
+
+        /* Khu vực mũi tên chéo hội tụ dài */
+        .converge-connector {
+            width: 145px;
+            height: 385px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .converge-svg {
+            width: 100%;
+            height: 100%;
+            display: block;
+            overflow: visible;
+        }
+
+        /* Cột 2: Data Hub - Đứng ở giữa, chiều cao vừa vặn */
+        .hub-pillar {
+            width: 325px;
+            background: #ffffff;
+            border: 2.5px solid var(--primary);
+            border-radius: 16px;
+            padding: 14px 18px;
+            display: flex;
+            flex-direction: column;
+            gap: 9px;
+            box-shadow: 0 8px 24px -4px rgba(2, 132, 199, 0.16);
+            flex-shrink: 0;
+        }
+
+        .pillar-head {
+            font-size: 14.5px;
+            font-weight: 800;
+            padding: 8px 12px;
+            border-radius: 8px;
+            text-align: center;
+            letter-spacing: 0.3px;
+        }
+
+        .flow-item {
+            border-radius: 10px;
+            padding: 9px 13px;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .flow-item-title {
+            font-size: 14.5px;
+            font-weight: 800;
+        }
+
+        .flow-item-sub {
+            font-size: 12.5px;
+            font-weight: 500;
+        }
+
+        .hub-item {
+            background: var(--primary-light);
+            border: 1.5px solid var(--primary-border);
+        }
+
+        .hub-item .flow-item-title {
+            color: var(--primary-dark);
+        }
+
+        .hub-item .flow-item-sub {
+            color: var(--text-sub);
+        }
+
+        /* Mũi tên giữa Hub và HEMIS dài ra */
+        .arrow-between-hub-moet {
+            width: 110px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            flex-shrink: 0;
+        }
+
+        .arrow-between-hub-moet .arrow-label {
+            font-size: 12.5px;
+            font-weight: 800;
+            color: var(--text-sub);
+            text-align: center;
+            line-height: 1.2;
+            margin-top: 2px;
+        }
+
+        /* Cột 3: HEMIS - Chiều cao vừa vặn */
+        .moet-pillar {
+            width: 285px;
+            background: #ffffff;
+            border: 2px solid var(--success);
+            border-radius: 16px;
+            padding: 14px 18px;
+            display: flex;
+            flex-direction: column;
+            gap: 9px;
+            box-shadow: var(--shadow-card);
+            flex-shrink: 0;
+        }
+
+        .moet-item {
+            background: var(--success-light);
+            border: 1.5px solid var(--success-border);
+        }
+
+        .moet-item .flow-item-title {
+            color: var(--success-dark);
+        }
+
+        .moet-item .flow-item-sub {
+            color: var(--text-sub);
+        }
+
+        /* Banner */
+        .banner {
+            border-radius: 12px;
+            padding: 10px 20px;
+            font-size: 15px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 10px;
+            flex-shrink: 0;
+        }
+
+        .banner-blue {
+            background: var(--primary-light);
+            border: 1.5px solid var(--primary-border);
+            color: #0369a1;
+        }
+
+        /* Grids & Cards */
+        .grid-2 { 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 24px; 
+            flex: 1;
+            min-height: 0;
+        }
+
+        .grid-3 { 
+            display: grid; 
+            grid-template-columns: repeat(3, 1fr); 
+            gap: 18px; 
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1.5px solid var(--border-card);
+            border-radius: 16px;
+            padding: 20px 24px;
+            box-shadow: var(--shadow-card);
+            display: flex;
+            flex-direction: column;
+            transition: all 0.25s ease;
+        }
+
+        /* Controls */
+        .controls-bar {
+            position: fixed;
+            bottom: 16px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 8px 22px;
+            background: #ffffff;
+            border: 1.5px solid var(--border-card);
+            border-radius: 30px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+            z-index: 1000;
+        }
+
+        .nav-btn {
+            background: #f1f5f9;
+            border: 1.5px solid #cbd5e1;
+            color: var(--text-main);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .nav-btn:hover {
+            background: var(--primary);
+            color: #fff;
+            border-color: var(--primary);
+        }
+
+        .counter {
+            font-family: var(--font-mono);
+            font-size: 15px;
+            font-weight: 800;
+            color: var(--text-muted);
+        }
+
+        .counter span#curr {
+            color: var(--primary);
+        }
+
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: var(--primary);
+            z-index: 1001;
+            transition: width 0.3s;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="progress-bar" id="progressBar"></div>
+
+    <div class="slide-deck">
+
+        <!-- ==================== SLIDE 1: MÔ HÌNH TỔNG THỂ (MŨI TÊN CHÉO HỘI TỤ DÀI) ==================== -->
+        <div class="slide active">
+            <div class="slide-header">
+                <div class="brand-group">
+                    <span class="brand-badge">LDA</span>
+                    <span class="brand-name">TRƯỜNG ĐẠI HỌC CÔNG ĐOÀN</span>
+                </div>
+                <div class="category-pill">KIẾN TRÚC TỔNG THỂ</div>
+            </div>
+            <div class="slide-body">
+                <div class="slide-title-block">
+                    <h2 class="slide-title">Mô Hình Tổng Thể: Gom Dữ Liệu Phân Tán Lên HEMIS</h2>
+                    <p class="slide-desc">Dữ liệu phân tán từng phòng ban được kết nối tập trung về TUU DataHub trước khi đẩy lên Cổng Bộ GD&ĐT</p>
+                </div>
+
+                <div class="flow-diagram-s1">
+                    <!-- CỘT 1: 4 Ô VUÔNG TÁCH RỜI XA NHAU, CHIỀU NGANG THU GỌN -->
+                    <div class="scattered-col">
+                        <div class="scattered-card">
+                            <div>
+                                <div class="scattered-title">Phần Mềm Quản Lý Đào Tạo</div>
+                                <div class="scattered-sub">CSDL SQL Server (Ngành, Sinh viên, Điểm)</div>
+                            </div>
+                            <span class="scattered-badge badge-sql">SQL</span>
+                        </div>
+
+                        <div class="scattered-card">
+                            <div>
+                                <div class="scattered-title">Phòng Tổ Chức Cán Bộ</div>
+                                <div class="scattered-sub">File Excel hồ sơ CBGV, hợp đồng, lý lịch</div>
+                            </div>
+                            <span class="scattered-badge badge-excel">Excel</span>
+                        </div>
+
+                        <div class="scattered-card">
+                            <div>
+                                <div class="scattered-title">Phòng CSVC, QLKH, Tài Chính</div>
+                                <div class="scattered-sub">File Excel đất đai, phòng học, tài sản</div>
+                            </div>
+                            <span class="scattered-badge badge-excel">Excel</span>
+                        </div>
+
+                        <div class="scattered-card">
+                            <div>
+                                <div class="scattered-title">Hồ Sơ Giấy & Sổ Gốc</div>
+                                <div class="scattered-sub">Sổ cấp văn bằng tốt nghiệp, quyết định</div>
+                            </div>
+                            <span class="scattered-badge badge-paper">Hồ sơ</span>
+                        </div>
+                    </div>
+
+                    <!-- MŨI TÊN CHÉO HỘI TỤ (DÀI 145PX) -->
+                    <div class="converge-connector">
+                        <svg class="converge-svg" viewBox="0 0 145 385">
+                            <defs>
+                                <marker id="arrow-blue" markerWidth="9" markerHeight="7" refX="7" refY="3.5" orient="auto">
+                                    <polygon points="0 0, 9 3.5, 0 7" fill="#0284c7" />
+                                </marker>
+                            </defs>
+                            <!-- Mũi tên 1: Từ ô 1 chéo xuống hội tụ (↘) -->
+                            <line x1="2" y1="33" x2="137" y2="132" stroke="#0284c7" stroke-width="2.6" stroke-linecap="round" marker-end="url(#arrow-blue)" />
+                            
+                            <!-- Mũi tên 2: Từ ô 2 hơi chéo xuống (↘) -->
+                            <line x1="2" y1="137" x2="137" y2="186" stroke="#0284c7" stroke-width="2.6" stroke-linecap="round" marker-end="url(#arrow-blue)" />
+                            
+                            <!-- Mũi tên 3: Từ ô 3 hơi chéo lên (↗) -->
+                            <line x1="2" y1="243" x2="137" y2="240" stroke="#0284c7" stroke-width="2.6" stroke-linecap="round" marker-end="url(#arrow-blue)" />
+                            
+                            <!-- Mũi tên 4: Từ ô 4 chéo lên hội tụ (↗) -->
+                            <line x1="2" y1="348" x2="137" y2="294" stroke="#0284c7" stroke-width="2.6" stroke-linecap="round" marker-end="url(#arrow-blue)" />
+                        </svg>
+                    </div>
+
+                    <!-- CỘT 2: TUU DATA HUB (ĐỨNG Ở GIỮA - TẬP TRUNG, GỌN GÀNG) -->
+                    <div class="hub-pillar">
+                        <div class="pillar-head" style="background: var(--primary); color: #fff;">
+                            TUU DATA HUB (ĐỨNG Ở GIỮA - TẬP TRUNG)
+                        </div>
+
+                        <div class="flow-item hub-item">
+                            <div class="flow-item-title">1. Gom Dữ Liệu Tự Động</div>
+                            <div class="flow-item-sub">Kéo SQL Server Read-Only & nạp mẫu Excel</div>
+                        </div>
+
+                        <div class="flow-item hub-item">
+                            <div class="flow-item-title">2. Chuẩn Hóa Danh Mục</div>
+                            <div class="flow-item-sub">Tự động khớp >175 danh mục chuẩn Bộ GD&ĐT</div>
+                        </div>
+
+                        <div class="flow-item hub-item">
+                            <div class="flow-item-title">3. Quét & Báo Lỗi Trực Quan</div>
+                            <div class="flow-item-sub">Chỉ rõ từng dòng thiếu CCCD, sai mã để sửa nhanh</div>
+                        </div>
+
+                        <div class="flow-item hub-item">
+                            <div class="flow-item-title">4. Ký Số Điện Tử</div>
+                            <div class="flow-item-sub">Bao gói XML-DSig hợp lệ (USB Token / SmartCA)</div>
+                        </div>
+                    </div>
+
+                    <!-- MŨI TÊN DÀI TỪ DATA HUB SANG CỔNG BỘ -->
+                    <div class="arrow-between-hub-moet">
+                        <svg width="90" height="26" viewBox="0 0 90 26">
+                            <defs>
+                                <marker id="arrow-green" markerWidth="9" markerHeight="7" refX="7" refY="3.5" orient="auto">
+                                    <polygon points="0 0, 9 3.5, 0 7" fill="#059669" />
+                                </marker>
+                            </defs>
+                            <line x1="4" y1="13" x2="82" y2="13" stroke="#059669" stroke-width="3" stroke-linecap="round" marker-end="url(#arrow-green)" />
+                        </svg>
+                        <span class="arrow-label">REST API<br>Adapter</span>
+                    </div>
+
+                    <!-- CỘT 3: CỔNG HEMIS BỘ GD&ĐT - GỌN GÀNG -->
+                    <div class="moet-pillar">
+                        <div class="pillar-head" style="background: var(--success-light); color: var(--success-dark);">
+                            CỔNG HEMIS BỘ GD&ĐT
+                        </div>
+
+                        <div class="flow-item moet-item">
+                            <div class="flow-item-title">SSO OAuth2</div>
+                            <div class="flow-item-sub">Xác thực kết nối tài khoản trường</div>
+                        </div>
+
+                        <div class="flow-item moet-item">
+                            <div class="flow-item-title">Tiếp Nhận Ký Số</div>
+                            <div class="flow-item-sub">Kiểm tra tính pháp lý file XML đã ký</div>
+                        </div>
+
+                        <div class="flow-item moet-item">
+                            <div class="flow-item-title">Dữ Liệu Nghiệp Vụ</div>
+                            <div class="flow-item-sub">Tiếp nhận các gói dữ liệu JSON</div>
+                        </div>
+
+                        <div class="flow-item moet-item">
+                            <div class="flow-item-title">CSDL Quốc Gia</div>
+                            <div class="flow-item-sub">Phê duyệt chỉ tiêu tuyển sinh năm tới</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="banner banner-blue">
+                    💡 <strong>Mục đích cốt lõi:</strong> Nhà trường <strong>KHÔNG PHẢI NHẬP LẠI</strong> dữ liệu cũ! Data Hub tự động gom, ánh xạ và đẩy Cổng Bộ.
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== SLIDE 2: HAI GIAI ĐOẠN (HÀNG TRÊN - HÀNG DƯỚI, GỌN GÀNG KHÔNG TRỐNG) ==================== -->
+        <div class="slide">
+            <div class="slide-header">
+                <div class="brand-group">
+                    <span class="brand-badge">LDA</span>
+                    <span class="brand-name">TRƯỜNG ĐẠI HỌC CÔNG ĐOÀN</span>
+                </div>
+                <div class="category-pill">LỘ TRÌNH PHÁT TRIỂN</div>
+            </div>
+            <div class="slide-body">
+                <div class="slide-title-block">
+                    <h2 class="slide-title">Lộ Trình Chiến Lược: 2 Giai Đoạn Triển Khai</h2>
+                    <p class="slide-desc">Từ hoàn thành nghĩa vụ nộp Bộ cấp bách đến Hệ thống Quản trị Đại học số toàn diện</p>
+                </div>
+
+                <!-- Bố cục căn giữa, không kéo giãn thừa khoảng trắng -->
+                <div style="display: flex; flex-direction: column; justify-content: center; gap: 20px; flex: 1;">
+                    <!-- HÀNG TRÊN: GIAI ĐOẠN 1 -->
+                    <div class="card" style="border: 2px solid var(--primary); padding: 18px 26px; gap: 14px;">
+                        <div style="display: flex; align-items: center; justify-content: space-between;">
+                            <div style="display: flex; align-items: center; gap: 14px;">
+                                <span style="background: var(--primary); color: #fff; font-size: 13.5px; font-weight: 800; padding: 5px 14px; border-radius: 8px;">
+                                    GIAI ĐOẠN 1 (1 THÁNG - CẤP BÁCH)
+                                </span>
+                                <span style="font-size: 20px; font-weight: 800; color: var(--text-main);">
+                                    Tích Hợp & Đẩy Dữ Liệu Lên CSDL HEMIS Bộ GD&ĐT
+                                </span>
+                            </div>
+                            <span style="font-size: 13.5px; font-weight: 800; color: var(--danger); background: var(--danger-light); padding: 5px 14px; border-radius: 6px;">
+                                Mục tiêu sống còn: Bảo toàn chỉ tiêu tuyển sinh
+                            </span>
+                        </div>
+
+                        <div class="grid-3" style="gap: 16px;">
+                            <div style="background: #f0f9ff; border: 1.5px solid #bae6fd; padding: 14px 18px; border-radius: 12px;">
+                                <div style="font-size: 15px; font-weight: 800; color: var(--primary-dark); margin-bottom: 5px;">Phạm Vi Thực Hiện</div>
+                                <div style="font-size: 13.5px; color: var(--text-sub); line-height: 1.5;">Gom dữ liệu từ SQL Đào tạo và file Excel các phòng ban ➔ Chuẩn hóa mã ➔ Ký số điện tử ➔ Đẩy Cổng Bộ.</div>
+                            </div>
+                            <div style="background: #f0f9ff; border: 1.5px solid #bae6fd; padding: 14px 18px; border-radius: 12px;">
+                                <div style="font-size: 15px; font-weight: 800; color: var(--primary-dark); margin-bottom: 5px;">Cách Làm Việc & Phối Hợp</div>
+                                <div style="font-size: 13.5px; color: var(--text-sub); line-height: 1.5;">Nhà trường không phải gõ lại; tận dụng dữ liệu sẵn có. Trưởng phòng kiểm tra và bấm duyệt dữ liệu phòng mình trên web.</div>
+                            </div>
+                            <div style="background: #f0f9ff; border: 1.5px solid #bae6fd; padding: 14px 18px; border-radius: 12px;">
+                                <div style="font-size: 15px; font-weight: 800; color: var(--primary-dark); margin-bottom: 5px;">Kết Quả Đạt Được</div>
+                                <div style="font-size: 13.5px; color: var(--text-sub); line-height: 1.5;">Hoàn thành đúng hạn Công văn 6240 của Bộ, bảo toàn 100% chỉ tiêu tuyển sinh và uy tín của Nhà trường.</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- HÀNG DƯỚI: GIAI ĐOẠN 2 -->
+                    <div class="card" style="border: 2px solid var(--success); padding: 18px 26px; gap: 14px;">
+                        <div style="display: flex; align-items: center; justify-content: space-between;">
+                            <div style="display: flex; align-items: center; gap: 14px;">
+                                <span style="background: var(--success); color: #fff; font-size: 13.5px; font-weight: 800; padding: 5px 14px; border-radius: 8px;">
+                                    GIAI ĐOẠN 2 (MỞ RỘNG DÀI HẠN)
+                                </span>
+                                <span style="font-size: 20px; font-weight: 800; color: var(--text-main);">
+                                    Hệ Thống Quản Trị Tác Nghiệp Hoàn Chỉnh (ERP Đại Học)
+                                </span>
+                            </div>
+                            <span style="font-size: 13.5px; font-weight: 800; color: var(--success-dark); background: var(--success-light); padding: 5px 14px; border-radius: 6px;">
+                                Quản trị số toàn diện
+                            </span>
+                        </div>
+
+                        <div class="grid-3" style="gap: 16px;">
+                            <div style="background: #f0fdf4; border: 1.5px solid #bbf7d0; padding: 14px 18px; border-radius: 12px;">
+                                <div style="font-size: 15px; font-weight: 800; color: var(--success-dark); margin-bottom: 5px;">Nền Móng Sẵn Có</div>
+                                <div style="font-size: 13.5px; color: var(--text-sub); line-height: 1.5;">Tái sử dụng 100% CSDL tập trung và logic nghiệp vụ đã được làm sạch và chuẩn hóa ở Giai đoạn 1.</div>
+                            </div>
+                            <div style="background: #f0fdf4; border: 1.5px solid #bbf7d0; padding: 14px 18px; border-radius: 12px;">
+                                <div style="font-size: 15px; font-weight: 800; color: var(--success-dark); margin-bottom: 5px;">Quản Trị Đại Học Số</div>
+                                <div style="font-size: 13.5px; color: var(--text-sub); line-height: 1.5;">Xây dựng các cổng Web tác nghiệp chuyên sâu cho từng phòng ban (Nhân sự, CSVC, NCKH, Đào tạo...).</div>
+                            </div>
+                            <div style="background: #f0fdf4; border: 1.5px solid #bbf7d0; padding: 14px 18px; border-radius: 12px;">
+                                <div style="font-size: 15px; font-weight: 800; color: var(--success-dark); margin-bottom: 5px;">Đồng Bộ Tự Động Quanh Năm</div>
+                                <div style="font-size: 13.5px; color: var(--text-sub); line-height: 1.5;">Dữ liệu vận hành hằng ngày tự động đồng bộ lên HEMIS quanh năm (Auto-Sync), không lãng phí chi phí đầu tư.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== SLIDE 3: DANH SÁCH 13 PHÂN HỆ ==================== -->
+        <div class="slide">
+            <div class="slide-header">
+                <div class="brand-group">
+                    <span class="brand-badge">LDA</span>
+                    <span class="brand-name">TRƯỜNG ĐẠI HỌC CÔNG ĐOÀN</span>
+                </div>
+                <div class="category-pill">CHUẨN HÓA PHÂN HỆ</div>
+            </div>
+            <div class="slide-body">
+                <div class="slide-title-block">
+                    <h2 class="slide-title">Danh Sách 13 Phân Hệ Chuẩn Hóa Theo Bộ GD&ĐT</h2>
+                    <p class="slide-desc">5 Phân hệ cốt lõi quyết định chỉ tiêu tuyển sinh • 8 Phân hệ nghiệp vụ bổ trợ</p>
+                </div>
+
+                <div class="grid-2">
+                    <!-- Bảng 1: 5 Nhóm Đào tạo lõi -->
+                    <div class="card" style="border: 2px solid var(--primary); padding: 20px 24px;">
+                        <div>
+                            <div style="font-size: 17px; font-weight: 800; color: var(--primary-dark); margin-bottom: 14px;">
+                                ⭐ 5 PHÂN HỆ CỐT LÕI (QUYẾT ĐỊNH CHỈ TIÊU TUYỂN SINH)
+                            </div>
+                            <div style="display: flex; flex-direction: column; gap: 11px;">
+                                <div style="background: var(--primary-light); border: 1.5px solid var(--primary-border); padding: 12px 16px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center;">
+                                    <div>
+                                        <div style="font-size: 16.5px; font-weight: 800; color: var(--text-main);">1. Ngành Đào Tạo</div>
+                                        <div style="font-size: 13.5px; color: var(--text-muted); margin-top: 2px;">Phòng Quản lý Đào tạo</div>
+                                    </div>
+                                    <span style="font-size: 13px; font-weight: 800; background: var(--primary); color: #fff; padding: 5px 12px; border-radius: 6px;">SQL Auto</span>
+                                </div>
+
+                                <div style="background: var(--primary-light); border: 1.5px solid var(--primary-border); padding: 12px 16px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center;">
+                                    <div>
+                                        <div style="font-size: 16.5px; font-weight: 800; color: var(--text-main);">2. Chương Trình Đào Tạo (CTĐT)</div>
+                                        <div style="font-size: 13.5px; color: var(--text-muted); margin-top: 2px;">P. Quản lý Đào tạo / P. Quản lý Chất lượng</div>
+                                    </div>
+                                    <span style="font-size: 13px; font-weight: 800; background: var(--primary); color: #fff; padding: 5px 12px; border-radius: 6px;">SQL Auto</span>
+                                </div>
+
+                                <div style="background: var(--primary-light); border: 1.5px solid var(--primary-border); padding: 12px 16px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center;">
+                                    <div>
+                                        <div style="font-size: 16.5px; font-weight: 800; color: var(--text-main);">3. Đội Ngũ Cán Bộ, Giảng Viên</div>
+                                        <div style="font-size: 13.5px; color: var(--text-muted); margin-top: 2px;">Phòng Tổ chức Cán bộ</div>
+                                    </div>
+                                    <span style="font-size: 13px; font-weight: 800; background: var(--primary); color: #fff; padding: 5px 12px; border-radius: 6px;">Excel/Hồ sơ</span>
+                                </div>
+
+                                <div style="background: var(--primary-light); border: 1.5px solid var(--primary-border); padding: 12px 16px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center;">
+                                    <div>
+                                        <div style="font-size: 16.5px; font-weight: 800; color: var(--text-main);">4. Người Học (Sinh Viên, Học Viên)</div>
+                                        <div style="font-size: 13.5px; color: var(--text-muted); margin-top: 2px;">P. Quản lý Đào tạo / P. Công tác Sinh viên</div>
+                                    </div>
+                                    <span style="font-size: 13px; font-weight: 800; background: var(--primary); color: #fff; padding: 5px 12px; border-radius: 6px;">SQL Auto</span>
+                                </div>
+
+                                <div style="background: var(--primary-light); border: 1.5px solid var(--primary-border); padding: 12px 16px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center;">
+                                    <div>
+                                        <div style="font-size: 16.5px; font-weight: 800; color: var(--text-main);">5. Tuyển Sinh (Chỉ Tiêu & Trúng Tuyển)</div>
+                                        <div style="font-size: 13.5px; color: var(--text-muted); margin-top: 2px;">Phòng Quản lý Đào tạo</div>
+                                    </div>
+                                    <span style="font-size: 13px; font-weight: 800; background: var(--primary); color: #fff; padding: 5px 12px; border-radius: 6px;">SQL Auto</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bảng 2: 8 Nhóm Bổ trợ -->
+                    <div class="card" style="border: 2px solid var(--warning); padding: 20px 24px;">
+                        <div>
+                            <div style="font-size: 17px; font-weight: 800; color: var(--warning-dark); margin-bottom: 14px;">
+                                📑 8 PHÂN HỆ NGHIỆP VỤ BỔ TRỢ (FILE EXCEL PHÒNG BAN)
+                            </div>
+                            <div style="display: flex; flex-direction: column; gap: 8px;">
+                                <div style="background: var(--warning-light); border: 1px solid var(--warning-border); padding: 9px 14px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center;">
+                                    <span style="font-size: 15px; font-weight: 700; color: var(--text-main);">6. Cơ Sở Giáo Dục & Kiểm Định</span>
+                                    <span style="font-size: 13px; color: var(--text-muted); font-weight: 600;">P. QLCL / Phòng Hành chính</span>
+                                </div>
+                                <div style="background: var(--warning-light); border: 1px solid var(--warning-border); padding: 9px 14px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center;">
+                                    <span style="font-size: 15px; font-weight: 700; color: var(--text-main);">7. Hội Đồng Trường & Ban Giám Hiệu</span>
+                                    <span style="font-size: 13px; color: var(--text-muted); font-weight: 600;">Phòng Tổ chức Cán bộ</span>
+                                </div>
+                                <div style="background: var(--warning-light); border: 1px solid var(--warning-border); padding: 9px 14px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center;">
+                                    <span style="font-size: 15px; font-weight: 700; color: var(--text-main);">8. Cơ Sở Vật Chất & Đất Đai</span>
+                                    <span style="font-size: 13px; color: var(--text-muted); font-weight: 600;">Phòng Hành chính - Quản trị</span>
+                                </div>
+                                <div style="background: var(--warning-light); border: 1px solid var(--warning-border); padding: 9px 14px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center;">
+                                    <span style="font-size: 15px; font-weight: 700; color: var(--text-main);">9. Khoa Học Công Nghệ, Đề Tài, Bài Báo</span>
+                                    <span style="font-size: 13px; color: var(--text-muted); font-weight: 600;">Phòng QLKH & TTTL</span>
+                                </div>
+                                <div style="background: var(--warning-light); border: 1px solid var(--warning-border); padding: 9px 14px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center;">
+                                    <span style="font-size: 15px; font-weight: 700; color: var(--text-main);">10. Tài Chính & Tài Sản</span>
+                                    <span style="font-size: 13px; color: var(--text-muted); font-weight: 600;">Phòng Tài chính - Kế toán</span>
+                                </div>
+                                <div style="background: var(--warning-light); border: 1px solid var(--warning-border); padding: 9px 14px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center;">
+                                    <span style="font-size: 15px; font-weight: 700; color: var(--text-main);">11. Hợp Tác Quốc Tế</span>
+                                    <span style="font-size: 13px; color: var(--text-muted); font-weight: 600;">Viện ĐT, BD & HTQT</span>
+                                </div>
+                                <div style="background: var(--warning-light); border: 1px solid var(--warning-border); padding: 9px 14px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center;">
+                                    <span style="font-size: 15px; font-weight: 700; color: var(--text-main);">12. Hợp Tác Doanh Nghiệp & Việc Làm</span>
+                                    <span style="font-size: 13px; color: var(--text-muted); font-weight: 600;">P. GDCT & CTSV</span>
+                                </div>
+                                <div style="background: #fef2f2; border: 1px solid #fecaca; padding: 9px 14px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center;">
+                                    <span style="font-size: 15px; font-weight: 700; color: var(--danger);">13. Văn Bằng Tốt Nghiệp</span>
+                                    <span style="font-size: 13px; font-weight: 700; color: var(--danger);">P. QLĐT (Xuất Excel chuẩn Bộ)*</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== SLIDE 4: KẾ HOẠCH & KHẢ THI ==================== -->
+        <div class="slide">
+            <div class="slide-header">
+                <div class="brand-group">
+                    <span class="brand-badge">LDA</span>
+                    <span class="brand-name">TRƯỜNG ĐẠI HỌC CÔNG ĐOÀN</span>
+                </div>
+                <div class="category-pill">KẾ HOẠCH & KHẢ THI</div>
+            </div>
+            <div class="slide-body">
+                <div class="slide-title-block">
+                    <h2 class="slide-title">Kế Hoạch Thực Hiện 30 Ngày & Đánh Giá Khả Thi</h2>
+                    <p class="slide-desc">Lộ trình 4 tuần rõ ràng và các yếu tố bảo đảm khả thi 100% cho Nhà trường</p>
+                </div>
+
+                <div class="grid-2">
+                    <!-- Cột 1: 4 Tuần -->
+                    <div class="card" style="border: 2px solid var(--primary); padding: 22px 26px;">
+                        <div>
+                            <div style="font-size: 18px; font-weight: 800; color: var(--primary-dark); margin-bottom: 14px;">
+                                ⏱️ LỘ TRÌNH 4 TUẦN (GIAI ĐOẠN 1)
+                            </div>
+                            <div style="display: flex; flex-direction: column; gap: 11px;">
+                                <div style="background: var(--primary-light); padding: 12px 16px; border-radius: 10px;">
+                                    <div style="font-size: 16px; font-weight: 800; color: var(--text-main);">Tuần 1: Hạ Tầng & Nhóm Đào Tạo Cốt Lõi</div>
+                                    <div style="font-size: 13.5px; color: var(--text-sub); margin-top: 3px;">Kết nối Cổng Bộ test, nạp SQL đào tạo, tiếp nhận file Excel các phòng ban.</div>
+                                </div>
+
+                                <div style="background: #f1f5f9; padding: 12px 16px; border-radius: 10px;">
+                                    <div style="font-size: 16px; font-weight: 800; color: var(--text-main);">Tuần 2: Chuẩn Hóa Cán Bộ GV & Cơ Sở Vật Chất</div>
+                                    <div style="font-size: 13.5px; color: var(--text-sub); margin-top: 3px;">Quét sạch lỗi CCCD 12 số, phân công giảng dạy, trả file sửa lỗi nhanh cho các phòng.</div>
+                                </div>
+
+                                <div style="background: #f1f5f9; padding: 12px 16px; border-radius: 10px;">
+                                    <div style="font-size: 16px; font-weight: 800; color: var(--text-main);">Tuần 3: Các Phân Hệ Chuyên Môn & Duyệt Số Liệu</div>
+                                    <div style="font-size: 13.5px; color: var(--text-sub); margin-top: 3px;">NCKH, Tài chính, HTQT, HTDN, Văn bằng. Trưởng phòng kiểm tra & duyệt trên web.</div>
+                                </div>
+
+                                <div style="background: var(--primary-light); padding: 12px 16px; border-radius: 10px;">
+                                    <div style="font-size: 16px; font-weight: 800; color: var(--text-main);">Tuần 4: Ký Số Điện Tử & Nộp Cổng HEMIS</div>
+                                    <div style="font-size: 13.5px; color: var(--text-sub); margin-top: 3px;">Đóng gói XML-DSig, gửi API Cổng Bộ. Hoàn thành nghĩa vụ & chốt chỉ tiêu tuyển sinh.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cột 2: Khả thi & Phối hợp -->
+                    <div class="card" style="border: 2px solid var(--success); padding: 22px 26px;">
+                        <div>
+                            <div style="font-size: 18px; font-weight: 800; color: var(--success-dark); margin-bottom: 14px;">
+                                🛡️ ĐÁNH GIÁ MỨC ĐỘ KHẢ THI
+                            </div>
+
+                            <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 14px;">
+                                <div>
+                                    <div style="font-size: 15.5px; font-weight: 800; color: var(--text-main);">1. Đã Có Khung Kiến Trúc & Bản Demo Thử Nghiệm (PoC)</div>
+                                    <div style="font-size: 13.5px; color: var(--text-sub); line-height: 1.5; margin-top: 2px;">
+                                        Đã có giải pháp kỹ thuật và <strong>bản demo PoC chạy thử nghiệm</strong> chứng minh luồng xử lý vận hành được (sẽ show trực tiếp sau slide này). <em>Lưu ý: Đây là bản demo thử nghiệm chứng minh phương án, chưa phải phần mềm triển khai hoàn chỉnh thật tại trường.</em>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <div style="font-size: 15.5px; font-weight: 800; color: var(--text-main);">2. Không Bắt Trường Gõ Lại Từ Đầu</div>
+                                    <div style="font-size: 13.5px; color: var(--text-sub); line-height: 1.5; margin-top: 2px;">
+                                        Kéo tự động từ CSDL Đào tạo hiện có; các phòng ban khác chỉ cần nộp file Excel sẵn có theo mẫu chuẩn của Bộ.
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <div style="font-size: 15.5px; font-weight: 800; color: var(--text-main);">3. Kế Hoạch Phòng Vệ An Toàn Tuyệt Đối</div>
+                                    <div style="font-size: 13.5px; color: var(--text-sub); line-height: 1.5; margin-top: 2px;">
+                                        Nếu phòng ngoài lề bị trễ, chốt chắc chắn 5 mục cốt lõi trước để bảo toàn 100% chỉ tiêu tuyển sinh cho Nhà trường.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Điều kiện phối hợp từ phía Nhà trường (Đã bỏ chữ quyết liệt) -->
+                            <div style="background: var(--warning-light); border: 1.5px solid var(--warning-border); padding: 12px 16px; border-radius: 10px;">
+                                <div style="font-size: 14px; font-weight: 800; color: var(--warning-dark); margin-bottom: 4px;">🤝 ĐIỀU KIỆN PHỐI HỢP TỪ PHÍA NHÀ TRƯỜNG:</div>
+                                <div style="font-size: 13px; color: #78350F; line-height: 1.5;">
+                                    • Cử 01 đầu mối (POC) mỗi phòng ban ngay tại cuộc họp hôm nay.<br>
+                                    • Bàn giao CSDL Đào tạo & các file Excel trong 5-7 ngày đầu.<br>
+                                    • Trưởng phòng ban kiểm tra và duyệt dữ liệu cuốn chiếu trên web.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Controls Bar -->
+    <div class="controls-bar">
+        <button class="nav-btn" onclick="prevSlide()" title="Phím mũi tên trái">←</button>
+        <div class="counter"><span id="curr">1</span> / <span id="total">4</span></div>
+        <button class="nav-btn" onclick="nextSlide()" title="Phím mũi tên phải hoặc Space">→</button>
+    </div>
+
+    <script>
+        let current = 1;
+        const slides = document.querySelectorAll('.slide');
+        const total = slides.length;
+        document.getElementById('total').textContent = total;
+
+        function showSlide(n) {
+            if (n < 1) n = 1;
+            if (n > total) n = total;
+            current = n;
+            slides.forEach((s, i) => {
+                s.classList.toggle('active', i === n - 1);
+            });
+            document.getElementById('curr').textContent = n;
+            document.getElementById('progressBar').style.width = ((n / total) * 100) + '%';
+        }
+
+        function nextSlide() { showSlide(current + 1); }
+        function prevSlide() { showSlide(current - 1); }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                e.preventDefault();
+                nextSlide();
+            }
+            if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                prevSlide();
+            }
+            if (e.key === 'f' || e.key === 'F') {
+                if (!document.fullscreenElement) {
+                    document.documentElement.requestFullscreen();
+                } else {
+                    document.exitFullscreen();
+                }
+            }
+        });
+
+        showSlide(1);
+    </script>
+</body>
+</html>

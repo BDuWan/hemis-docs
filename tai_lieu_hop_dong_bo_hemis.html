@@ -1,0 +1,1169 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cẩm Nang Họp & Kế Hoạch Đồng Bộ Dữ Liệu HEMIS - Trường ĐH Công Đoàn</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-page: #f8fafc;
+            --bg-card: #ffffff;
+            --border-card: #e2e8f0;
+            --border-hover: #cbd5e1;
+            
+            --text-main: #0f172a;
+            --text-sub: #334155;
+            --text-muted: #64748b;
+            
+            --primary: #0284c7;
+            --primary-dark: #0369a1;
+            --primary-light: #e0f2fe;
+            --primary-border: #bae6fd;
+            
+            --success: #059669;
+            --success-dark: #047857;
+            --success-light: #d1fae5;
+            --success-border: #a7f3d0;
+            
+            --warning: #d97706;
+            --warning-dark: #b45309;
+            --warning-light: #fef3c7;
+            --warning-border: #fde68a;
+            
+            --danger: #dc2626;
+            --danger-light: #fee2e2;
+            --danger-border: #fecaca;
+            
+            --sidebar-w: 290px;
+            --font-main: 'Plus Jakarta Sans', -apple-system, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+            --shadow-card: 0 4px 12px -2px rgba(15, 23, 42, 0.05), 0 2px 6px -1px rgba(15, 23, 42, 0.03);
+            --shadow-hover: 0 12px 24px -4px rgba(15, 23, 42, 0.08);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-page);
+            color: var(--text-main);
+            font-family: var(--font-main);
+            line-height: 1.6;
+            display: flex;
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Sidebar Navigation */
+        .sidebar {
+            width: var(--sidebar-w);
+            background: #ffffff;
+            border-right: 1.5px solid var(--border-card);
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            overflow-y: auto;
+            padding: 24px 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            z-index: 100;
+        }
+
+        .sidebar-brand {
+            padding: 0 10px 16px 10px;
+            border-bottom: 1.5px solid var(--border-card);
+        }
+
+        .brand-badge {
+            display: inline-block;
+            background: var(--primary);
+            color: #fff;
+            font-size: 11px;
+            font-weight: 800;
+            padding: 4px 10px;
+            border-radius: 6px;
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+        }
+
+        .brand-title {
+            font-size: 16px;
+            font-weight: 800;
+            color: var(--text-main);
+            line-height: 1.3;
+        }
+
+        .brand-sub {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        .nav-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .nav-item a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 9px 12px;
+            border-radius: 8px;
+            font-size: 13.5px;
+            font-weight: 600;
+            color: var(--text-sub);
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .nav-item a:hover {
+            background: #f1f5f9;
+            color: var(--primary);
+        }
+
+        .nav-item a.active {
+            background: var(--primary-light);
+            color: var(--primary-dark);
+            font-weight: 700;
+        }
+
+        .nav-icon {
+            font-size: 16px;
+        }
+
+        .sidebar-footer {
+            margin-top: auto;
+            padding: 14px 10px 0 10px;
+            border-top: 1.5px solid var(--border-card);
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        /* Main Content */
+        .main-wrapper {
+            margin-left: var(--sidebar-w);
+            flex: 1;
+            padding: 36px 48px 100px 48px;
+            max-width: 1280px;
+        }
+
+        /* Top Action Bar */
+        .top-action-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 28px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid var(--border-card);
+        }
+
+        .doc-meta {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .status-badge {
+            background: #ecfdf5;
+            color: var(--success-dark);
+            border: 1px solid var(--success-border);
+            font-size: 12px;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 20px;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 700;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: #fff;
+        }
+        .btn-primary:hover { background: var(--primary-dark); }
+
+        .btn-outline {
+            background: #ffffff;
+            color: var(--text-sub);
+            border: 1.5px solid var(--border-card);
+        }
+        .btn-outline:hover { background: #f8fafc; border-color: var(--text-muted); }
+
+        /* Typography & Header */
+        .doc-title {
+            font-size: 32px;
+            font-weight: 800;
+            color: var(--text-main);
+            letter-spacing: -0.5px;
+            line-height: 1.25;
+            margin-bottom: 8px;
+        }
+
+        .doc-lead {
+            font-size: 16px;
+            color: var(--text-muted);
+            margin-bottom: 32px;
+            font-weight: 500;
+        }
+
+        /* Section Styling */
+        section {
+            margin-bottom: 44px;
+            scroll-margin-top: 24px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 18px;
+            padding-bottom: 10px;
+            border-bottom: 1.5px solid var(--border-card);
+        }
+
+        .section-num {
+            background: var(--primary-light);
+            color: var(--primary-dark);
+            font-family: var(--font-mono);
+            font-size: 14px;
+            font-weight: 800;
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .section-title {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--text-main);
+        }
+
+        /* Cards & Layout */
+        .card {
+            background: #ffffff;
+            border: 1.5px solid var(--border-card);
+            border-radius: 14px;
+            padding: 24px;
+            box-shadow: var(--shadow-card);
+            margin-bottom: 20px;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+
+        /* Callouts / Alerts */
+        .callout {
+            border-radius: 12px;
+            padding: 18px 22px;
+            margin-bottom: 20px;
+            font-size: 14.5px;
+            line-height: 1.6;
+        }
+
+        .callout-blue {
+            background: #f0f9ff;
+            border: 1.5px solid #bae6fd;
+            color: #0369a1;
+        }
+
+        .callout-warning {
+            background: #fffbeb;
+            border: 1.5px solid #fde68a;
+            color: #92400e;
+        }
+
+        .callout-danger {
+            background: #fef2f2;
+            border: 1.5px solid #fecaca;
+            color: #991b1b;
+        }
+
+        .callout-success {
+            background: #f0fdf4;
+            border: 1.5px solid #bbf7d0;
+            color: #166534;
+        }
+
+        /* Tables */
+        .custom-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            border: 1.5px solid var(--border-card);
+            border-radius: 12px;
+            overflow: hidden;
+            font-size: 14px;
+            margin-top: 14px;
+        }
+
+        .custom-table th {
+            background: #f8fafc;
+            color: var(--text-main);
+            font-weight: 700;
+            text-align: left;
+            padding: 12px 16px;
+            border-bottom: 1.5px solid var(--border-card);
+        }
+
+        .custom-table td {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border-card);
+            color: var(--text-sub);
+        }
+
+        .custom-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .custom-table tr:hover td {
+            background: #f8fafc;
+        }
+
+        .tag-pill {
+            display: inline-block;
+            font-size: 12px;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 6px;
+        }
+
+        .tag-blue { background: var(--primary-light); color: var(--primary-dark); }
+        .tag-green { background: var(--success-light); color: var(--success-dark); }
+        .tag-amber { background: var(--warning-light); color: var(--warning-dark); }
+        .tag-red { background: var(--danger-light); color: var(--danger); }
+
+        /* Timeline / Stepper */
+        .timeline-box {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .timeline-step {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: var(--primary-light);
+            color: var(--primary);
+            font-family: var(--font-mono);
+            font-weight: 800;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .timeline-content {
+            background: #ffffff;
+            border: 1.5px solid var(--border-card);
+            border-radius: 12px;
+            padding: 16px 20px;
+            flex: 1;
+        }
+
+        /* Q&A Accordion Style */
+        .qa-card {
+            background: #ffffff;
+            border: 1.5px solid var(--border-card);
+            border-radius: 12px;
+            margin-bottom: 14px;
+            overflow: hidden;
+            transition: all 0.2s;
+        }
+
+        .qa-card:hover {
+            border-color: var(--border-hover);
+        }
+
+        .qa-header {
+            padding: 16px 20px;
+            background: #f8fafc;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 700;
+            font-size: 15px;
+            color: var(--text-main);
+        }
+
+        .qa-header:hover {
+            background: #f1f5f9;
+        }
+
+        .qa-body {
+            padding: 18px 20px;
+            border-top: 1px solid var(--border-card);
+            font-size: 14px;
+            color: var(--text-sub);
+            line-height: 1.65;
+            background: #ffffff;
+        }
+
+        .filter-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: #f1f5f9;
+            border: 1.5px solid #cbd5e1;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-sub);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--primary);
+            color: #fff;
+            border-color: var(--primary);
+        }
+
+        /* Print styles */
+        @media print {
+            .sidebar, .top-action-bar, .controls-bar { display: none !important; }
+            .main-wrapper { margin-left: 0; padding: 0; }
+            .card, .timeline-content, .custom-table { box-shadow: none; border-color: #cbd5e1; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+        <div class="sidebar-brand">
+            <span class="brand-badge">LDA • TUU DATAHUB</span>
+            <div class="brand-title">Tài Liệu Họp & Triển Khai HEMIS</div>
+            <div class="brand-sub">Trường Đại học Công đoàn</div>
+        </div>
+
+        <ul class="nav-list">
+            <li class="nav-item"><a href="#tong-quan" class="active"><span class="nav-icon">📌</span> Tổng Quan 30 Ngày</a></li>
+            <li class="nav-item"><a href="#kien-truc"><span class="nav-icon">🏛️</span> Kiến Trúc TUU DataHub</a></li>
+            <li class="nav-item"><a href="#phan-he"><span class="nav-icon">📑</span> 13 Phân Hệ Chuẩn Bộ</a></li>
+            <li class="nav-item"><a href="#ke-hoach"><span class="nav-icon">⏱️</span> Lộ Trình 4 Tuần Cuốn Chiếu</a></li>
+            <li class="nav-item"><a href="#kich-ban-hop"><span class="nav-icon">👥</span> Kịch Bản Họp BGH Ngày Mai</a></li>
+            <li class="nav-item"><a href="#live-demo"><span class="nav-icon">💻</span> Kịch Bản 6 Cảnh Live Demo</a></li>
+            <li class="nav-item"><a href="#khao-sat"><span class="nav-icon">❓</span> 20 Câu Khảo Sát Phòng Ban</a></li>
+            <li class="nav-item"><a href="#doi-dap"><span class="nav-icon">🛡️</span> Bí Kíp Đối Đáp 8 Câu Hỏi Khó</a></li>
+        </ul>
+
+        <div class="sidebar-footer">
+            <div>💡 <strong>File trình chiếu:</strong></div>
+            <div style="margin-top: 4px;"><a href="slide_thuyet_trinh_hemis.html" target="_blank" style="color: var(--primary); text-decoration: none; font-weight: 700;">➔ Mở Slide Thuyết Trình (HTML)</a></div>
+            <div style="margin-top: 4px;"><a href="slide_thuyet_trinh_hemis.pptx" style="color: var(--primary); text-decoration: none; font-weight: 700;">➔ Tải Slide PowerPoint (.pptx)</a></div>
+        </div>
+    </aside>
+
+    <!-- Main Content Wrapper -->
+    <main class="main-wrapper">
+
+        <!-- Top Action Bar -->
+        <div class="top-action-bar">
+            <div class="doc-meta">
+                <span class="status-badge">● SẴN SÀNG CHO CUỘC HỌP</span>
+                <span style="font-size: 13px; color: var(--text-muted); font-weight: 600;">Cập nhật: 12/10/2026</span>
+            </div>
+            <div class="btn-group">
+                <a href="slide_thuyet_trinh_hemis.html" target="_blank" class="btn btn-primary">🎬 Mở Slide Thuyết Trình</a>
+                <button onclick="window.print()" class="btn btn-outline">🖨️ In / Xuất PDF</button>
+            </div>
+        </div>
+
+        <h1 class="doc-title">Cẩm Nang Đồng Bộ Dữ Liệu HEMIS: Tài Liệu Điều Hành & Kịch Bản Cuộc Họp</h1>
+        <p class="doc-lead">Tài liệu điều hành toàn diện dành cho đội ngũ triển khai: Tổng quan cam kết 30 ngày, kịch bản thuyết trình, live demo thực nghiệm (PoC), 20 câu hỏi khảo sát và bí kíp đối đáp phản biện.</p>
+
+        <!-- ==================== PHẦN 1: TỔNG QUAN CHIẾN DỊCH ==================== -->
+        <section id="tong-quan">
+            <div class="section-header">
+                <span class="section-num">01</span>
+                <h2 class="section-title">Tổng Quan Chiến Dịch 30 Ngày & Mục Tiêu Cốt Lõi</h2>
+            </div>
+
+            <div class="callout callout-warning">
+                <strong>⚠️ TÍNH CHẤT CẤP BÁCH:</strong> Theo Công văn 6240 của Bộ GD&ĐT, thời hạn hoàn thành nộp CSDL Quốc gia HEMIS là bắt buộc. Phía Trường Đại học Công đoàn cần hoàn thành toàn bộ trong vòng 1 tháng. Khối lượng công việc rất nặng, đòi hỏi hai bên phối hợp nhịp nhàng, quyết đoán, không được chậm trễ.
+            </div>
+
+            <div class="grid-3">
+                <div class="card" style="border-top: 4px solid var(--primary);">
+                    <div style="font-size: 16px; font-weight: 800; color: var(--primary); margin-bottom: 8px;">Mục Tiêu Tối Thượng</div>
+                    <div style="font-size: 14px; color: var(--text-sub);">
+                        Hoàn thành đẩy đủ <strong>12 Phân hệ REST API + 01 Phân hệ xuất Excel</strong> lên Cổng HEMIS trong 30 ngày, bảo toàn 100% chỉ tiêu tuyển sinh cho Nhà trường.
+                    </div>
+                </div>
+
+                <div class="card" style="border-top: 4px solid var(--success);">
+                    <div style="font-size: 16px; font-weight: 800; color: var(--success); margin-bottom: 8px;">Cam Kết Đội Ngũ Kỹ Thuật</div>
+                    <div style="font-size: 14px; color: var(--text-sub);">
+                        Tập trung tối đa nhân sự chủ lực, tăng ca hỗ trợ xử lý dữ liệu. Đã có sẵn 100% khung code nền tảng ETL, Adapter và chữ ký số XML-DSig.
+                    </div>
+                </div>
+
+                <div class="card" style="border-top: 4px solid var(--danger);">
+                    <div style="font-size: 16px; font-weight: 800; color: var(--danger); margin-bottom: 8px;">Kế Hoạch Phòng Vệ An Toàn</div>
+                    <div style="font-size: 14px; color: var(--text-sub);">
+                        Nếu một số phòng ban ngoài lề chậm nộp dữ liệu, ưu tiên chốt dứt điểm <strong>5 Phân hệ cốt lõi</strong> để giữ chỉ tiêu trước hạn chót của Bộ.
+                    </div>
+                </div>
+            </div>
+
+            <div class="callout callout-blue">
+                <strong>💡 LƯU Ý QUAN TRỌNG VỀ PHẦN MỀM DEMO:</strong> Bản phần mềm mang đi trình chiếu trong cuộc họp ngày mai là <strong>Khung thực nghiệm PoC (Proof-of-Concept)</strong> đã hoàn thiện luồng xử lý và dữ liệu mẫu (83 bản ghi seed) để chứng minh giải pháp vận hành được. Cần truyền thông rõ với Nhà trường: <em>Đây là bản demo chứng minh quy trình, chưa phải phần mềm triển khai hoàn chỉnh thật tại trường</em>. Giai đoạn 1 (30 ngày) chính là quá trình kết nối CSDL thật và làm sạch dữ liệu của trường.
+            </div>
+        </section>
+
+        <!-- ==================== PHẦN 2: KIẾN TRÚC TUU DATAHUB ==================== -->
+        <section id="kien-truc">
+            <div class="section-header">
+                <span class="section-num">02</span>
+                <h2 class="section-title">Kiến Trúc Kỹ Thuật & Quy Trình 4 Bước Khép Kín</h2>
+            </div>
+
+            <div class="card">
+                <h3 style="font-size: 17px; font-weight: 800; margin-bottom: 14px;">Mô Hình Chuyển Đổi Dữ Liệu: Phân Tán ➔ Tập Trung ➔ Cổng HEMIS</h3>
+                <div class="grid-3" style="gap: 16px;">
+                    <div style="background: #fffbeb; border: 1.5px solid #fde68a; padding: 16px; border-radius: 10px;">
+                        <div style="font-weight: 800; color: var(--warning-dark); font-size: 15px; margin-bottom: 6px;">1. Dữ Liệu Phân Tán Của Trường</div>
+                        <p style="font-size: 13.5px; color: var(--text-sub);">
+                            • CSDL SQL Đào tạo (Ngành, Sinh viên, Điểm)<br>
+                            • File Excel phòng ban (TCCB, CSVC, QLKH, Tài chính)<br>
+                            • Hồ sơ giấy (Sổ cấp văn bằng)
+                        </p>
+                    </div>
+
+                    <div style="background: #f0f9ff; border: 1.5px solid #bae6fd; padding: 16px; border-radius: 10px;">
+                        <div style="font-weight: 800; color: var(--primary-dark); font-size: 15px; margin-bottom: 6px;">2. TUU DataHub (Ở Giữa)</div>
+                        <p style="font-size: 13.5px; color: var(--text-sub);">
+                            • Kéo SQL Server Read-Only tự động<br>
+                            • Tự động khớp >175 danh mục chuẩn Bộ<br>
+                            • Quét lỗi CCCD, trùng lặp, sửa tại chỗ<br>
+                            • Trưởng phòng duyệt ➔ Bao gói ký số XML
+                        </p>
+                    </div>
+
+                    <div style="background: #f0fdf4; border: 1.5px solid #bbf7d0; padding: 16px; border-radius: 10px;">
+                        <div style="font-weight: 800; color: var(--success-dark); font-size: 15px; margin-bottom: 6px;">3. Cổng HEMIS Bộ GD&ĐT</div>
+                        <p style="font-size: 13.5px; color: var(--text-sub);">
+                            • SSO OAuth2 Token<br>
+                            • Tiếp nhận file XML đã ký số hợp lệ<br>
+                            • Tiếp nhận các gói JSON nghiệp vụ<br>
+                            • Ghi nhận CSDL Quốc gia & Chốt chỉ tiêu
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3 style="font-size: 17px; font-weight: 800; margin-bottom: 14px;">Quy Trình 4 Bước Khép Kín (Chuẩn Hóa UI/UX Single-Tenant)</h3>
+                <div class="grid-4" style="gap: 14px;">
+                    <div style="background: #f8fafc; border: 1.5px solid #cbd5e1; padding: 14px; border-radius: 10px;">
+                        <div style="font-family: var(--font-mono); font-weight: 800; color: var(--primary); font-size: 16px;">BƯỚC 1</div>
+                        <div style="font-weight: 800; font-size: 14px; margin-top: 4px;">Nạp Dữ Liệu</div>
+                        <div style="font-size: 12.5px; color: var(--text-muted); margin-top: 4px;">Kéo SQL Server hoặc upload file Excel mẫu Bộ.</div>
+                    </div>
+
+                    <div style="background: #f8fafc; border: 1.5px solid #cbd5e1; padding: 14px; border-radius: 10px;">
+                        <div style="font-family: var(--font-mono); font-weight: 800; color: var(--warning); font-size: 16px;">BƯỚC 2</div>
+                        <div style="font-weight: 800; font-size: 14px; margin-top: 4px;">Làm Sạch & Sửa Lỗi</div>
+                        <div style="font-size: 12.5px; color: var(--text-muted); margin-top: 4px;">Quét >175 danh mục Bộ, chỉ rõ dòng lỗi, sửa tại chỗ.</div>
+                    </div>
+
+                    <div style="background: #f8fafc; border: 1.5px solid #cbd5e1; padding: 14px; border-radius: 10px;">
+                        <div style="font-family: var(--font-mono); font-weight: 800; color: #7c3aed; font-size: 16px;">BƯỚC 3</div>
+                        <div style="font-weight: 800; font-size: 14px; margin-top: 4px;">Phê Duyệt Dữ Liệu</div>
+                        <div style="font-size: 12.5px; color: var(--text-muted); margin-top: 4px;">Trưởng phòng ban kiểm tra tổng hợp và bấm duyệt.</div>
+                    </div>
+
+                    <div style="background: #f8fafc; border: 1.5px solid #cbd5e1; padding: 14px; border-radius: 10px;">
+                        <div style="font-family: var(--font-mono); font-weight: 800; color: var(--success); font-size: 16px;">BƯỚC 4</div>
+                        <div style="font-weight: 800; font-size: 14px; margin-top: 4px;">Ký Số & Đẩy Bộ</div>
+                        <div style="font-size: 12.5px; color: var(--text-muted); margin-top: 4px;">Bao gói XML-DSig, bắn REST API, nhận biên lai Bộ.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== PHẦN 3: 13 PHÂN HỆ ==================== -->
+        <section id="phan-he">
+            <div class="section-header">
+                <span class="section-num">03</span>
+                <h2 class="section-title">Danh Sách 13 Phân Hệ Chuẩn Hóa Theo Bộ GD&ĐT</h2>
+            </div>
+
+            <p style="font-size: 14.5px; color: var(--text-sub); margin-bottom: 14px;">
+                Bộ GD&ĐT yêu cầu 13 phân hệ ký số. Khi họp với Nhà trường, <strong>bắt buộc gọi bằng Tên Nghiệp Vụ</strong> (không dùng các mã kỹ thuật db... làm Thầy/Cô khó hiểu):
+            </p>
+
+            <table class="custom-table">
+                <thead>
+                    <tr>
+                        <th style="width: 60px;">STT</th>
+                        <th>Tên Phân Hệ Chuẩn Hóa</th>
+                        <th>Phương Thức Tích Hợp</th>
+                        <th>Đơn Vị Phụ Trách</th>
+                        <th>Mức Độ Quan Trọng</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="background: #f0f9ff;">
+                        <td><strong>01</strong></td>
+                        <td><strong>Ngành Đào Tạo</strong></td>
+                        <td><span class="tag-pill tag-blue">SQL Auto</span></td>
+                        <td>Phòng Quản lý Đào tạo</td>
+                        <td><span class="tag-pill tag-blue">⭐ Cốt lõi (Chỉ tiêu)</span></td>
+                    </tr>
+                    <tr style="background: #f0f9ff;">
+                        <td><strong>02</strong></td>
+                        <td><strong>Chương Trình Đào Tạo (CTĐT)</strong></td>
+                        <td><span class="tag-pill tag-blue">SQL Auto</span></td>
+                        <td>P. QLĐT / P. QLCL</td>
+                        <td><span class="tag-pill tag-blue">⭐ Cốt lõi (Chỉ tiêu)</span></td>
+                    </tr>
+                    <tr style="background: #f0f9ff;">
+                        <td><strong>03</strong></td>
+                        <td><strong>Đội Ngũ Cán Bộ, Giảng Viên</strong></td>
+                        <td><span class="tag-pill tag-amber">File Excel / Hồ sơ</span></td>
+                        <td>Phòng Tổ chức Cán bộ</td>
+                        <td><span class="tag-pill tag-blue">⭐ Cốt lõi (Chỉ tiêu)</span></td>
+                    </tr>
+                    <tr style="background: #f0f9ff;">
+                        <td><strong>04</strong></td>
+                        <td><strong>Người Học (Sinh Viên, Học Viên)</strong></td>
+                        <td><span class="tag-pill tag-blue">SQL Auto</span></td>
+                        <td>P. QLĐT / P. CTSV</td>
+                        <td><span class="tag-pill tag-blue">⭐ Cốt lõi (Chỉ tiêu)</span></td>
+                    </tr>
+                    <tr style="background: #f0f9ff;">
+                        <td><strong>05</strong></td>
+                        <td><strong>Tuyển Sinh (Chỉ Tiêu & Trúng Tuyển)</strong></td>
+                        <td><span class="tag-pill tag-blue">SQL Auto</span></td>
+                        <td>Phòng Quản lý Đào tạo</td>
+                        <td><span class="tag-pill tag-blue">⭐ Cốt lõi (Chỉ tiêu)</span></td>
+                    </tr>
+                    <tr>
+                        <td>06</td>
+                        <td>Cơ Sở Giáo Dục & Kiểm Định</td>
+                        <td><span class="tag-pill tag-amber">Nạp Excel</span></td>
+                        <td>P. QLCL / Phòng Hành chính</td>
+                        <td><span class="tag-pill tag-green">Bổ trợ</span></td>
+                    </tr>
+                    <tr>
+                        <td>07</td>
+                        <td>Hội Đồng Trường & Ban Giám Hiệu</td>
+                        <td><span class="tag-pill tag-amber">Nạp Excel</span></td>
+                        <td>Phòng Tổ chức Cán bộ</td>
+                        <td><span class="tag-pill tag-green">Bổ trợ</span></td>
+                    </tr>
+                    <tr>
+                        <td>08</td>
+                        <td>Cơ Sở Vật Chất & Đất Đai</td>
+                        <td><span class="tag-pill tag-amber">Nạp Excel</span></td>
+                        <td>Phòng Hành chính - Quản trị</td>
+                        <td><span class="tag-pill tag-green">Bổ trợ</span></td>
+                    </tr>
+                    <tr>
+                        <td>09</td>
+                        <td>Khoa Học Công Nghệ, Đề Tài, Bài Báo</td>
+                        <td><span class="tag-pill tag-amber">Nạp Excel</span></td>
+                        <td>Phòng QLKH & TTTL</td>
+                        <td><span class="tag-pill tag-green">Bổ trợ</span></td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td>Tài Chính & Tài Sản</td>
+                        <td><span class="tag-pill tag-amber">Nạp Excel</span></td>
+                        <td>Phòng Tài chính - Kế toán</td>
+                        <td><span class="tag-pill tag-green">Bổ trợ</span></td>
+                    </tr>
+                    <tr>
+                        <td>11</td>
+                        <td>Hợp Tác Quốc Tế</td>
+                        <td><span class="tag-pill tag-amber">Nạp Excel</span></td>
+                        <td>Viện ĐT, BD & HTQT</td>
+                        <td><span class="tag-pill tag-green">Bổ trợ</span></td>
+                    </tr>
+                    <tr>
+                        <td>12</td>
+                        <td>Hợp Tác Doanh Nghiệp & Việc Làm</td>
+                        <td><span class="tag-pill tag-amber">Nạp Excel</span></td>
+                        <td>P. GDCT & CTSV</td>
+                        <td><span class="tag-pill tag-green">Bổ trợ</span></td>
+                    </tr>
+                    <tr style="background: #fef2f2;">
+                        <td>13</td>
+                        <td><strong>Văn Bằng Tốt Nghiệp</strong></td>
+                        <td><span class="tag-pill tag-red">Xuất Excel chuẩn Bộ</span></td>
+                        <td>Phòng Quản lý Đào tạo</td>
+                        <td><span class="tag-pill tag-red">Bộ chưa mở API (Nộp Excel)*</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- ==================== PHẦN 4: LỘ TRÌNH 4 TUẦN ==================== -->
+        <section id="ke-hoach">
+            <div class="section-header">
+                <span class="section-num">04</span>
+                <h2 class="section-title">Lộ Trình Triển Khai 4 Tuần Cuốn Chiếu</h2>
+            </div>
+
+            <div class="timeline-box">
+                <div class="timeline-step">W1</div>
+                <div class="timeline-content">
+                    <div style="font-weight: 800; font-size: 16px; color: var(--primary-dark);">Tuần 1: Thiết Lập Hạ Tầng & Nhóm Đào Tạo Cốt Lõi</div>
+                    <p style="font-size: 13.5px; color: var(--text-sub); margin-top: 4px;">
+                        • Thiết lập kết nối Cổng HEMIS kiểm thử (OAuth2 Token).<br>
+                        • Nhận kết nối Read-Only vào SQL Đào tạo ➔ Kéo tự động Ngành, CTĐT, Sinh viên, Điểm.<br>
+                        • Bàn giao mẫu Excel và thu thập dữ liệu thô ban đầu từ tất cả các phòng ban.
+                    </p>
+                </div>
+            </div>
+
+            <div class="timeline-box">
+                <div class="timeline-step">W2</div>
+                <div class="timeline-content">
+                    <div style="font-weight: 800; font-size: 16px; color: var(--primary-dark);">Tuần 2: Chuẩn Hóa Cán Bộ Giảng Viên & Cơ Sở Vật Chất</div>
+                    <p style="font-size: 13.5px; color: var(--text-sub); margin-top: 4px;">
+                        • Quét sạch lỗi CCCD 12 số, phân công giảng dạy, ngạch bậc giảng viên phòng TCCB.<br>
+                        • Nạp số liệu đất đai, phòng học, hội trường từ phòng Hành chính.<br>
+                        • Trả file lỗi cuốn chiếu để phòng ban xác nhận sửa trực tiếp.
+                    </p>
+                </div>
+            </div>
+
+            <div class="timeline-box">
+                <div class="timeline-step">W3</div>
+                <div class="timeline-content">
+                    <div style="font-weight: 800; font-size: 16px; color: var(--primary-dark);">Tuần 3: Các Phân Hệ Chuyên Môn & Phê Duyệt Số Liệu</div>
+                    <p style="font-size: 13.5px; color: var(--text-sub); margin-top: 4px;">
+                        • Xử lý hoàn tất NCKH, Tài chính, HTQT, HTDN và Văn bằng tốt nghiệp.<br>
+                        • Mở quyền cho các Trưởng phòng ban kiểm tra tổng hợp và bấm duyệt số liệu trên giao diện web.
+                    </p>
+                </div>
+            </div>
+
+            <div class="timeline-box">
+                <div class="timeline-step" style="background: var(--success-light); color: var(--success-dark);">W4</div>
+                <div class="timeline-content" style="border-color: var(--success-border);">
+                    <div style="font-weight: 800; font-size: 16px; color: var(--success-dark);">Tuần 4: Ký Số Điện Tử & Đồng Bộ Cổng HEMIS</div>
+                    <p style="font-size: 13.5px; color: var(--text-sub); margin-top: 4px;">
+                        • Đóng gói XML-DSig, cắm USB Token hoặc kết nối SmartCA để ký số.<br>
+                        • Gửi toàn bộ gói tin sang Cổng HEMIS của Bộ, nhận biên lai tiếp nhận CSDL Quốc gia.<br>
+                        • Chốt dữ liệu, hoàn thành xuất sắc nghĩa vụ nộp Bộ và bảo toàn 100% chỉ tiêu tuyển sinh.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== PHẦN 5: KỊCH BẢN CUỘC HỌP BGH ==================== -->
+        <section id="kich-ban-hop">
+            <div class="section-header">
+                <span class="section-num">05</span>
+                <h2 class="section-title">Kịch Bản Điều Hành Cuộc Họp Với Ban Giám Hiệu</h2>
+            </div>
+
+            <div class="card">
+                <h3 style="font-size: 17px; font-weight: 800; margin-bottom: 12px;">Phân Bổ Thời Lượng Cuộc Họp (Tổng 75 Phút)</h3>
+                <div class="grid-4" style="gap: 14px;">
+                    <div style="background: #f0f9ff; padding: 14px; border-radius: 10px; border: 1px solid #bae6fd;">
+                        <div style="font-weight: 800; color: var(--primary);">00 - 15 Phút</div>
+                        <div style="font-weight: 700; font-size: 13.5px; margin-top: 4px;">Trình Bày Slide</div>
+                        <div style="font-size: 12px; color: var(--text-sub); margin-top: 4px;">4 slide súc tích: Mô hình, 2 giai đoạn, 13 phân hệ, kế hoạch 30 ngày.</div>
+                    </div>
+
+                    <div style="background: #f0fdf4; padding: 14px; border-radius: 10px; border: 1px solid #bbf7d0;">
+                        <div style="font-weight: 800; color: var(--success);">15 - 30 Phút</div>
+                        <div style="font-weight: 700; font-size: 13.5px; margin-top: 4px;">Live Demo PoC</div>
+                        <div style="font-size: 12px; color: var(--text-sub); margin-top: 4px;">Thực hiện 6 phân cảnh minh họa quy trình nạp, sửa lỗi và ký số.</div>
+                    </div>
+
+                    <div style="background: #fffbeb; padding: 14px; border-radius: 10px; border: 1px solid #fde68a;">
+                        <div style="font-weight: 800; color: var(--warning-dark);">30 - 60 Phút</div>
+                        <div style="font-weight: 700; font-size: 13.5px; margin-top: 4px;">Khảo Sát & Thảo Luận</div>
+                        <div style="font-size: 12px; color: var(--text-sub); margin-top: 4px;">Đặt bộ câu hỏi khảo sát từng phòng, đối đáp các câu hỏi hóc búa.</div>
+                    </div>
+
+                    <div style="background: #f8fafc; padding: 14px; border-radius: 10px; border: 1px solid #cbd5e1;">
+                        <div style="font-weight: 800; color: var(--text-main);">60 - 75 Phút</div>
+                        <div style="font-weight: 700; font-size: 13.5px; margin-top: 4px;">Chốt Đầu Mối & Ký Kết</div>
+                        <div style="font-size: 12px; color: var(--text-sub); margin-top: 4px;">Cử POC từng phòng, thống nhất lịch bàn giao dữ liệu Tuần 1.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3 style="font-size: 17px; font-weight: 800; margin-bottom: 12px;">Phân Công Vai Trò Đội Ngũ Khi Họp</h3>
+                <p style="font-size: 14px; color: var(--text-sub); line-height: 1.6;">
+                    • <strong>Người chủ trì / Thuyết trình chính:</strong> Trình bày slide, giải thích giá trị chiến lược, giải đáp câu hỏi của Ban Giám hiệu, giữ vững lập trường về tiến độ 30 ngày và điều kiện phối hợp.<br>
+                    • <strong>Kỹ thuật viên vận hành Demo:</strong> Chuẩn bị sẵn máy tính, kết nối mạng ổn định, mở sẵn tab `http://localhost:8088`, thao tác mượt mà theo đúng kịch bản 6 phân cảnh.<br>
+                    • <strong>Thư ký cuộc họp:</strong> Ghi chép chi tiết danh sách đầu mối (POC) của từng phòng ban, các ghi chú về hiện trạng dữ liệu và biên bản ghi nhớ kết luận của Ban Giám hiệu.
+                </p>
+            </div>
+        </section>
+
+        <!-- ==================== PHẦN 6: LIVE DEMO ==================== -->
+        <section id="live-demo">
+            <div class="section-header">
+                <span class="section-num">06</span>
+                <h2 class="section-title">Kịch Bản 6 Phân Cảnh Live Demo PoC (TUU DataHub)</h2>
+            </div>
+
+            <div class="callout callout-blue">
+                <strong>💡 LƯU Ý KHI THỰC HIỆN DEMO:</strong> Khi chuyển từ Slide sang màn hình demo, hãy mở đầu bằng câu: <em>“Kính thưa Ban Giám hiệu và Thầy/Cô, để chứng minh giải pháp của chúng tôi hoàn toàn khả thi và vận hành thông suốt, sau đây chúng tôi xin phép minh họa trực tiếp quy trình xử lý trên bản thực nghiệm PoC TUU DataHub.”</em>
+            </div>
+
+            <div class="card">
+                <div style="display: flex; flex-direction: column; gap: 16px;">
+                    <div style="border-left: 4px solid var(--primary); padding-left: 14px;">
+                        <div style="font-weight: 800; font-size: 15px; color: var(--primary);">CẢNH 1: Đăng Nhập & Dashboard Tổng Quan</div>
+                        <div style="font-size: 13.5px; color: var(--text-sub); margin-top: 3px;">
+                            Mở màn hình Dashboard (`http://localhost:8088`). Giới thiệu widget tiến độ 13 phân hệ, thanh tiến độ % hoàn thành, biểu đồ trạng thái (Hợp lệ, Lỗi, Chờ duyệt).
+                        </div>
+                    </div>
+
+                    <div style="border-left: 4px solid var(--primary); padding-left: 14px;">
+                        <div style="font-weight: 800; font-size: 15px; color: var(--primary);">CẢNH 2: Nạp Tự Động Từ CSDL Đào Tạo (SQL Server)</div>
+                        <div style="font-size: 13.5px; color: var(--text-sub); margin-top: 3px;">
+                            Bấm nút <strong>"Kéo dữ liệu từ SQL Đào tạo"</strong>. Show cho BGH thấy hệ thống tự động đổ về hàng ngàn sinh viên, ngành học trong 2 giây mà cán bộ không phải gõ một dòng nào.
+                        </div>
+                    </div>
+
+                    <div style="border-left: 4px solid var(--warning); padding-left: 14px;">
+                        <div style="font-weight: 800; font-size: 15px; color: var(--warning-dark);">CẢNH 3: Nạp File Excel Phòng Ban & Quét Lỗi Tự Động</div>
+                        <div style="font-size: 13.5px; color: var(--text-sub); margin-top: 3px;">
+                            Chọn phân hệ Cán bộ GV ➔ Kéo thả file Excel hồ sơ giáo viên. Bấm <strong>"Kiểm tra & Chuẩn hóa"</strong>. Hệ thống quét tức thì và bôi đỏ các dòng bị lỗi (thiếu CCCD, sai chức danh).
+                        </div>
+                    </div>
+
+                    <div style="border-left: 4px solid var(--warning); padding-left: 14px;">
+                        <div style="font-weight: 800; font-size: 15px; color: var(--warning-dark);">CẢNH 4: Sửa Lỗi Trực Quan Tại Chỗ (Inline Editing)</div>
+                        <div style="font-size: 13.5px; color: var(--text-sub); margin-top: 3px;">
+                            Bấm vào ô báo đỏ thiếu CCCD ➔ Gõ đúng 12 số CCCD ➔ Hệ thống đổi sang màu xanh "Hợp lệ" ngay lập tức mà không cần phải mở file Excel sửa lại từ đầu.
+                        </div>
+                    </div>
+
+                    <div style="border-left: 4px solid #7c3aed; padding-left: 14px;">
+                        <div style="font-weight: 800; font-size: 15px; color: #7c3aed;">CẢNH 5: Trưởng Phòng Ban Bấm Duyệt (Approval Workflow)</div>
+                        <div style="font-size: 13.5px; color: var(--text-sub); margin-top: 3px;">
+                            Khi dữ liệu đạt 100% hợp lệ, Trưởng phòng bấm <strong>"Duyệt Dữ Liệu"</strong>. Hệ thống khóa chỉnh sửa và ghi nhận log: <em>"Đã duyệt bởi Trưởng phòng TCCB"</em>.
+                        </div>
+                    </div>
+
+                    <div style="border-left: 4px solid var(--success); padding-left: 14px;">
+                        <div style="font-weight: 800; font-size: 15px; color: var(--success-dark);">CẢNH 6: Ký Số Điện Tử XML-DSig & Gửi Cổng Bộ</div>
+                        <div style="font-size: 13.5px; color: var(--text-sub); margin-top: 3px;">
+                            Bấm <strong>"Ký số & Đồng bộ HEMIS"</strong>. Show mã băm chữ ký số và gói tin XML-DSig hợp lệ được đẩy sang Cổng Bộ thành công, hiển thị biên lai giao dịch.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== PHẦN 7: 20 CÂU KHẢO SÁT ==================== -->
+        <section id="khao-sat">
+            <div class="section-header">
+                <span class="section-num">07</span>
+                <h2 class="section-title">Bộ Câu Hỏi Khảo Sát 20 Câu Dành Cho Các Phòng Ban</h2>
+            </div>
+
+            <p style="font-size: 14.5px; color: var(--text-sub); margin-bottom: 16px;">
+                Dùng bộ câu hỏi này trong Phần 3 của cuộc họp để nắm bắt chính xác hiện trạng dữ liệu và chốt cam kết bàn giao từ các Trưởng phòng:
+            </p>
+
+            <div class="filter-tabs">
+                <button class="filter-btn active" onclick="filterQuestions('all')">Tất Cả (20)</button>
+                <button class="filter-btn" onclick="filterQuestions('daotao')">Phòng Đào Tạo (5)</button>
+                <button class="filter-btn" onclick="filterQuestions('tccb')">Phòng TCCB (4)</button>
+                <button class="filter-btn" onclick="filterQuestions('csvc')">Phòng CSVC (3)</button>
+                <button class="filter-btn" onclick="filterQuestions('qlkh')">Phòng QLKH (3)</button>
+                <button class="filter-btn" onclick="filterQuestions('tckt')">Phòng Tài Chính (2)</button>
+                <button class="filter-btn" onclick="filterQuestions('ctsv')">CTSV & HTQT (3)</button>
+            </div>
+
+            <div id="questions-container">
+                <!-- P. Đào tạo -->
+                <div class="card q-item" data-dept="daotao">
+                    <div style="font-weight: 800; color: var(--primary); font-size: 15px;">Câu 1 (P. Đào tạo): Hệ thống phần mềm quản lý đào tạo hiện tại của trường là gì?</div>
+                    <div style="font-size: 14px; color: var(--text-sub); margin-top: 4px;">• <em>Mục đích hỏi:</em> Biết CSDL gốc là SQL Server hay Oracle để cấu hình ETL Read-Only.</div>
+                </div>
+                <div class="card q-item" data-dept="daotao">
+                    <div style="font-weight: 800; color: var(--primary); font-size: 15px;">Câu 2 (P. Đào tạo): Mã ngành đào tạo hiện tại có khớp 100% với Thông tư 09/2022 của Bộ không?</div>
+                    <div style="font-size: 14px; color: var(--text-sub); margin-top: 4px;">• <em>Mục đích hỏi:</em> Phát hiện sớm các ngành cổ hoặc mã nội bộ để lên bảng mapping.</div>
+                </div>
+                <div class="card q-item" data-dept="daotao">
+                    <div style="font-weight: 800; color: var(--primary); font-size: 15px;">Câu 3 (P. Đào tạo): Dữ liệu sinh viên hiện tại có đủ số CCCD 12 số không hay còn CMND cũ?</div>
+                    <div style="font-size: 14px; color: var(--text-sub); margin-top: 4px;">• <em>Mục đích hỏi:</em> Đánh giá tỷ lệ sạch CCCD để có phương án quét lỗi và bổ sung.</div>
+                </div>
+                <div class="card q-item" data-dept="daotao">
+                    <div style="font-weight: 800; color: var(--primary); font-size: 15px;">Câu 4 (P. Đào tạo): Dữ liệu phân công giảng dạy (Giảng viên dạy học phần nào) nằm ở đâu?</div>
+                    <div style="font-size: 14px; color: var(--text-sub); margin-top: 4px;">• <em>Mục đích hỏi:</em> Cổng HEMIS bắt buộc liên kết giữa GV và môn học để tính tải giảng dạy.</div>
+                </div>
+                <div class="card q-item" data-dept="daotao">
+                    <div style="font-weight: 800; color: var(--primary); font-size: 15px;">Câu 5 (P. Đào tạo): Dữ liệu sổ cấp văn bằng tốt nghiệp các năm trước lưu trữ như thế nào?</div>
+                    <div style="font-size: 14px; color: var(--text-sub); margin-top: 4px;">• <em>Mục đích hỏi:</em> Chuẩn bị file Excel chuẩn Bộ để nộp phân hệ Văn bằng.</div>
+                </div>
+
+                <!-- P. TCCB -->
+                <div class="card q-item" data-dept="tccb">
+                    <div style="font-weight: 800; color: var(--warning-dark); font-size: 15px;">Câu 6 (Phòng TCCB): Danh sách CBGV hiện lưu trong phần mềm nhân sự hay file Excel?</div>
+                    <div style="font-size: 14px; color: var(--text-sub); margin-top: 4px;">• <em>Mục đích hỏi:</em> Thống nhất định dạng nạp dữ liệu cho phân hệ Cán bộ.</div>
+                </div>
+                <div class="card q-item" data-dept="tccb">
+                    <div style="font-weight: 800; color: var(--warning-dark); font-size: 15px;">Câu 7 (Phòng TCCB): Hồ sơ giáo viên thỉnh giảng ngoài trường có được quản lý tập trung không?</div>
+                    <div style="font-size: 14px; color: var(--text-sub); margin-top: 4px;">• <em>Mục đích hỏi:</em> Tránh thiếu sót hồ sơ GV thỉnh giảng vì Bộ tính vào hệ số quy đổi.</div>
+                </div>
+                <div class="card q-item" data-dept="tccb">
+                    <div style="font-weight: 800; color: var(--warning-dark); font-size: 15px;">Câu 8 (Phòng TCCB): Chức danh nghề nghiệp, ngạch bậc có khớp danh mục Thông tư 08 không?</div>
+                    <div style="font-size: 14px; color: var(--text-sub); margin-top: 4px;">• <em>Mục đích hỏi:</em> Chuẩn bị ánh xạ tự động vào danh mục chuẩn của Bộ.</div>
+                </div>
+                <div class="card q-item" data-dept="tccb">
+                    <div style="font-weight: 800; color: var(--warning-dark); font-size: 15px;">Câu 9 (Phòng TCCB): Danh sách thành viên Hội đồng trường và Ban Giám hiệu đã có sẵn file chưa?</div>
+                    <div style="font-size: 14px; color: var(--text-sub); margin-top: 4px;">• <em>Mục đích hỏi:</em> Phân hệ này ít bản ghi, có thể hoàn thành trong 1 ngày.</div>
+                </div>
+
+                <!-- P. CSVC -->
+                <div class="card q-item" data-dept="csvc">
+                    <div style="font-weight: 800; color: var(--success-dark); font-size: 15px;">Câu 10 (Phòng CSVC): Dữ liệu đất đai, diện tích sàn xây dựng các cơ sở lưu ở đâu?</div>
+                    <div style="font-size: 14px; color: var(--text-sub); margin-top: 4px;">• <em>Mục đích hỏi:</em> Lấy số liệu m2 đất và diện tích phục vụ đào tạo để nhập Cổng Bộ.</div>
+                </div>
+                <div class="card q-item" data-dept="csvc">
+                    <div style="font-weight: 800; color: var(--success-dark); font-size: 15px;">Câu 11 (Phòng CSVC): Danh sách phòng học, giảng đường, phòng thí nghiệm có gắn mã định danh chưa?</div>
+                    <div style="font-size: 14px; color: var(--text-sub); margin-top: 4px;">• <em>Mục đích hỏi:</em> Khớp danh mục phòng học chuẩn Bộ GD&ĐT.</div>
+                </div>
+                <div class="card q-item" data-dept="csvc">
+                    <div style="font-weight: 800; color: var(--success-dark); font-size: 15px;">Câu 12 (Phòng CSVC): Thiết bị đào tạo giá trị trên 100 triệu đã có danh mục kiểm kê chưa?</div>
+                    <div style="font-size: 14px; color: var(--text-sub); margin-top: 4px;">• <em>Mục đích hỏi:</em> Phục vụ phân hệ Cơ sở vật chất.</div>
+                </div>
+
+                <!-- P. QLKH -->
+                <div class="card q-item" data-dept="qlkh">
+                    <div style="font-weight: 800; color: #7c3aed; font-size: 15px;">Câu 13 (Phòng QLKH): Danh mục đề tài NCKH các cấp (Bộ, Tỉnh, Trường) được quản lý thế nào?</div>
+                    <div style="font-size: 14px; color: var(--text-sub); margin-top: 4px;">• <em>Mục đích hỏi:</em> Chuyển đổi sang mẫu nạp Excel phân hệ NCKH.</div>
+                </div>
+                <div class="card q-item" data-dept="qlkh">
+                    <div style="font-weight: 800; color: #7c3aed; font-size: 15px;">Câu 14 (Phòng QLKH): Bài báo khoa học (Scopus/WoS/Trong nước) có lưu mã DOI và tên tạp chí chuẩn không?</div>
+                    <div style="font-size: 14px; color: var(--text-sub); margin-top: 4px;">• <em>Mục đích hỏi:</em> Chuẩn hóa danh mục bài báo khoa học.</div>
+                </div>
+                <div class="card q-item" data-dept="qlkh">
+                    <div style="font-weight: 800; color: #7c3aed; font-size: 15px;">Câu 15 (Phòng QLKH): Danh sách sách giáo trình, sách tham khảo do CBGV xuất bản có sẵn chưa?</div>
+                    <div style="font-size: 14px; color: var(--text-sub); margin-top: 4px;">• <em>Mục đích hỏi:</em> Nạp bổ sung phân hệ NCKH.</div>
+                </div>
+
+                <!-- P. Tài chính -->
+                <div class="card q-item" data-dept="tckt">
+                    <div style="font-weight: 800; color: var(--danger); font-size: 15px;">Câu 16 (Phòng Tài chính): Báo cáo tài chính quyết toán năm gần nhất đã được phê duyệt chưa?</div>
+                    <div style="font-size: 14px; color: var(--text-sub); margin-top: 4px;">• <em>Mục đích hỏi:</em> Lấy số liệu thu chi, học phí, ngân sách theo mẫu chuẩn của Bộ.</div>
+                </div>
+                <div class="card q-item" data-dept="tckt">
+                    <div style="font-weight: 800; color: var(--danger); font-size: 15px;">Câu 17 (Phòng Tài chính): Nguồn thu từ NCKH và chuyển giao công nghệ có tách bạch riêng không?</div>
+                    <div style="font-size: 14px; color: var(--text-sub); margin-top: 4px;">• <em>Mục đích hỏi:</em> Khớp chỉ tiêu tài chính NCKH của Bộ GD&ĐT.</div>
+                </div>
+
+                <!-- P. CTSV & HTQT -->
+                <div class="card q-item" data-dept="ctsv">
+                    <div style="font-weight: 800; color: var(--primary-dark); font-size: 15px;">Câu 18 (P. CTSV): Khảo sát việc làm sinh viên tốt nghiệp sau 12 tháng có sẵn số liệu không?</div>
+                    <div style="font-size: 14px; color: var(--text-sub); margin-top: 4px;">• <em>Mục đích hỏi:</em> Nạp phân hệ Hợp tác doanh nghiệp & Việc làm sinh viên.</div>
+                </div>
+                <div class="card q-item" data-dept="ctsv">
+                    <div style="font-weight: 800; color: var(--primary-dark); font-size: 15px;">Câu 19 (Viện HTQT): Danh sách văn bản ký kết hợp tác quốc tế (MoU/MoA) còn hiệu lực?</div>
+                    <div style="font-size: 14px; color: var(--text-sub); margin-top: 4px;">• <em>Mục đích hỏi:</em> Nạp phân hệ Hợp tác quốc tế.</div>
+                </div>
+                <div class="card q-item" data-dept="ctsv">
+                    <div style="font-weight: 800; color: var(--primary-dark); font-size: 15px;">Câu 20 (Chung các phòng): Mỗi phòng ban có thể cử 01 đầu mối (POC) ngay hôm nay để làm việc không?</div>
+                    <div style="font-size: 14px; color: var(--text-sub); margin-top: 4px;">• <em>Mục đích hỏi:</em> Chốt cam kết trách nhiệm và lập nhóm Zalo điều hành tác chiến ngay trong ngày.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== PHẦN 8: BÍ KÍP ĐỐI ĐÁP ==================== -->
+        <section id="doi-dap">
+            <div class="section-header">
+                <span class="section-num">08</span>
+                <h2 class="section-title">Bí Kíp Đối Đáp 8 Câu Hỏi Hóc Búa Từ Nhà Trường</h2>
+            </div>
+
+            <div class="qa-card">
+                <div class="qa-header" onclick="toggleQA(this)">
+                    <span>1. "Khối lượng 12 phân hệ quá nặng, 30 ngày liệu có kịp không?"</span>
+                    <span>▼</span>
+                </div>
+                <div class="qa-body">
+                    <strong>👉 Cách trả lời chuẩn:</strong> "Dạ hoàn toàn kịp nếu hai bên cùng chạy. Chúng tôi không bắt Thầy/Cô gõ lại dữ liệu từ đầu. Các phân hệ nặng nhất về Đào tạo (chiếm 80% dung lượng) sẽ được hệ thống kéo tự động qua kết nối SQL. Các phân hệ còn lại chỉ cần nạp theo mẫu Excel sẵn có. Bộ công cụ làm sạch và quét lỗi đã được lập trình sẵn. Chỉ cần Nhà trường bàn giao dữ liệu trong tuần đầu tiên, chúng tôi cam kết hoàn thành đúng hạn."
+                </div>
+            </div>
+
+            <div class="qa-card">
+                <div class="qa-header" onclick="toggleQA(this)">
+                    <span>2. "Nếu dữ liệu của trường có phân hệ chưa hoàn thiện thì xử lý thế nào?"</span>
+                    <span>▼</span>
+                </div>
+                <div class="qa-body">
+                    <strong>👉 Cách trả lời chuẩn:</strong> "Chúng tôi đã có sẵn <strong>Kế hoạch phòng vệ an toàn</strong>. Trong tình huống bất khả kháng, chúng tôi sẽ ưu tiên chốt dứt điểm 5 phân hệ cốt lõi quyết định chỉ tiêu tuyển sinh trước hạn chót của Bộ để bảo toàn 100% chỉ tiêu cho Trường. Các phân hệ ngoài lề sẽ đồng bộ bổ sung ngay trong đợt tiếp theo mà không làm ảnh hưởng đến hoạt động tuyển sinh."
+                </div>
+            </div>
+
+            <div class="qa-card">
+                <div class="qa-header" onclick="toggleQA(this)">
+                    <span>3. "Kết nối vào CSDL Đào tạo có gây ảnh hưởng hay làm mất an toàn dữ liệu không?"</span>
+                    <span>▼</span>
+                </div>
+                <div class="qa-body">
+                    <strong>👉 Cách trả lời chuẩn:</strong> "Tuyệt đối an toàn. Hệ thống của chúng tôi chỉ yêu cầu quyền <strong>Read-Only (Chỉ đọc)</strong> trên một bản sao (Replica) hoặc qua tài khoản giới hạn. Hệ thống không bao giờ ghi đè hay thay đổi bất kỳ bản ghi nào trên CSDL gốc của Nhà trường. Dữ liệu được mã hóa và triển khai hoàn toàn trong hạ tầng riêng của Trường (Single-tenant On-Premise)."
+                </div>
+            </div>
+
+            <div class="qa-card">
+                <div class="qa-header" onclick="toggleQA(this)">
+                    <span>4. "Dữ liệu giảng viên của trường đang thiếu nhiều số CCCD 12 số, xử lý ra sao?"</span>
+                    <span>▼</span>
+                </div>
+                <div class="qa-body">
+                    <strong>👉 Cách trả lời chuẩn:</strong> "Hệ thống TUU DataHub có tính năng quét lỗi thông minh. Khi nạp file, hệ thống sẽ lọc riêng danh sách các dòng bị thiếu CCCD hoặc CMND cũ, xuất file báo lỗi cho phòng TCCB để cập nhật nhanh. Ngoài ra, cán bộ có thể gõ bổ sung trực tiếp trên giao diện web mà không phải làm lại cả file Excel."
+                </div>
+            </div>
+
+            <div class="qa-card">
+                <div class="qa-header" onclick="toggleQA(this)">
+                    <span>5. "Chữ ký số dùng loại nào? Ai là người chịu trách nhiệm ký?"</span>
+                    <span>▼</span>
+                </div>
+                <div class="qa-body">
+                    <strong>👉 Cách trả lời chuẩn:</strong> "Hệ thống hỗ trợ cả USB Token PKCS#11 thông thường của Trường hoặc Chữ ký số từ xa (SmartCA). Về mặt quy trình, Trưởng phòng chuyên môn bấm duyệt dữ liệu phòng mình trước, sau đó Ban Giám hiệu hoặc cán bộ được ủy quyền sẽ cắm Token thực hiện ký số điện tử XML-DSig hợp lệ theo đúng quy chuẩn Bộ GD&ĐT."
+                </div>
+            </div>
+
+            <div class="qa-card">
+                <div class="qa-header" onclick="toggleQA(this)">
+                    <span>6. "Bộ có cập nhật danh mục hay thay đổi API thì hệ thống có thích ứng được không?"</span>
+                    <span>▼</span>
+                </div>
+                <div class="qa-body">
+                    <strong>👉 Cách trả lời chuẩn:</strong> "Hệ thống được thiết kế theo mô hình Adapter độc lập. Toàn bộ hơn 175 danh mục của Bộ được lưu trong bảng cấu hình động. Khi Bộ ban hành danh mục mới, chúng tôi chỉ cần nạp tệp danh mục mới vào hệ thống mà không cần phải viết lại code, đảm bảo tính bền vững lâu dài."
+                </div>
+            </div>
+
+            <div class="qa-card">
+                <div class="qa-header" onclick="toggleQA(this)">
+                    <span>7. "Sau khi nộp xong đợt này, năm sau trường lại phải làm lại từ đầu à?"</span>
+                    <span>▼</span>
+                </div>
+                <div class="qa-body">
+                    <strong>👉 Cách trả lời chuẩn:</strong> "Hoàn toàn không. Đây chính là giá trị của <strong>Giai đoạn 2</strong>. Toàn bộ CSDL tập trung và logic nghiệp vụ được làm sạch ở Giai đoạn 1 sẽ là nền tảng để trường mở rộng thành Cổng Quản trị tác nghiệp số (ERP). Dữ liệu phát sinh hằng ngày sẽ tự động đồng bộ quanh năm lên HEMIS, Nhà trường không bao giờ phải trải qua áp lực chạy nước rút như đợt này nữa."
+                </div>
+            </div>
+
+            <div class="qa-card">
+                <div class="qa-header" onclick="toggleQA(this)">
+                    <span>8. "Điều kiện tiên quyết để bên các anh cam kết xong trong 30 ngày là gì?"</span>
+                    <span>▼</span>
+                </div>
+                <div class="qa-body">
+                    <strong>👉 Cách trả lời chuẩn:</strong> "Chúng tôi cần sự phối hợp từ phía Nhà trường ở 3 điểm: (1) Cử ngay 01 đầu mối (POC) mỗi phòng ban ngay trong hôm nay; (2) Bàn giao quyền kết nối CSDL Đào tạo và các file Excel trong 5-7 ngày đầu tiên; (3) Các Trưởng phòng ban kiểm tra và bấm duyệt dữ liệu cuốn chiếu trên web theo từng tuần."
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        function filterQuestions(dept) {
+            const btns = document.querySelectorAll('.filter-btn');
+            btns.forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+
+            const items = document.querySelectorAll('.q-item');
+            items.forEach(item => {
+                if (dept === 'all' || item.getAttribute('data-dept') === dept) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        function toggleQA(header) {
+            const body = header.nextElementSibling;
+            const arrow = header.querySelector('span:last-child');
+            if (body.style.display === 'none') {
+                body.style.display = 'block';
+                arrow.textContent = '▲';
+            } else {
+                body.style.display = 'none';
+                arrow.textContent = '▼';
+            }
+        }
+
+        // Active link on scroll
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-item a');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(s => {
+                const top = s.offsetTop - 100;
+                if (pageYOffset >= top) {
+                    current = s.getAttribute('id');
+                }
+            });
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
